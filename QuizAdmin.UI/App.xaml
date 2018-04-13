@@ -4,6 +4,19 @@
              xmlns:local="clr-namespace:QuizAdmin.UI"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Background" Value="#818A8F"/>
+        </Style>
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1.8" ScaleY="1.8" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#818A8F"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
     </Application.Resources>
 </Application>

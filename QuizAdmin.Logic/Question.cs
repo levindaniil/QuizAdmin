@@ -12,5 +12,7 @@ namespace QuizAdmin.Logic
         public string Text { get; set; }
         public DateTime Date { get; set; }
         public string Explanation { get; set; }
+
+        public string ShortDate => Date.ToShortDateString();
     }
 }
