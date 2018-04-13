@@ -29,12 +29,24 @@ namespace QuizAdmin.UI
         {
             InitializeComponent();
             PageFactory.Instance.PageRepository.HomePage.OpenQuestions += OpenQuestions;
+            PageFactory.Instance.PageRepository.HomePage.AddQuestion += CreateNewQuestion;
+            PageFactory.Instance.PageRepository.QuestionListPage.GoHome += GoHome;
             mainFrame.NavigationService.Navigate(PageFactory.Instance.PageRepository.HomePage);
         }
 
         private void OpenQuestions()
         {
             mainFrame.NavigationService.Navigate(PageFactory.Instance.PageRepository.QuestionListPage);
+        }
+
+        private void CreateNewQuestion()
+        {
+            mainFrame.NavigationService.Navigate(new AddQuestionPage());
+        }
+
+        private void GoHome()
+        {
+            mainFrame.NavigationService.Navigate(PageFactory.Instance.PageRepository.HomePage);
         }
 
         

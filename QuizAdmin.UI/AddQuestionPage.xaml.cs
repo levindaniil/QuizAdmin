@@ -16,26 +16,13 @@ using System.Windows.Shapes;
 namespace QuizAdmin.UI
 {
     /// <summary>
-    /// Логика взаимодействия для HomePage.xaml
+    /// Логика взаимодействия для AddQuestionPage.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class AddQuestionPage : Page
     {
-        public HomePage()
+        public AddQuestionPage()
         {
             InitializeComponent();
-        }
-
-        public Action OpenQuestions;
-        public Action AddQuestion;
-
-        private void buttonViewQuestions_Click(object sender, RoutedEventArgs e)
-        {
-            OpenQuestions?.Invoke();
-        }
-
-        private void buttonAddQuestion_Click(object sender, RoutedEventArgs e)
-        {
-            AddQuestion?.Invoke();
         }
     }
 }

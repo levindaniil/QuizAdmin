@@ -15,7 +15,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="230"/>
         </Grid.ColumnDefinitions>
-        <Image Source="logo.png" Grid.Column="1" VerticalAlignment="Top" Width="210" Margin="10" HorizontalAlignment="Right"/>
+        <Image Source="logo.png" Grid.Column="1" VerticalAlignment="Top" Margin="10" HorizontalAlignment="Right"/>
         <Grid  Margin="10">
         <ListBox x:Name="listboxQuestions" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalContentAlignment="Center">
             <ListBox.ItemContainerStyle>
@@ -47,7 +47,8 @@
         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="5 0 15 5" VerticalAlignment="Bottom" >
             <Button x:Name="buttonViewStats" Content="View statistics" Width="200" Margin="5"/>
             <Button x:Name="buttonEditQuestion" Content="Edit question" Width="200" Margin="5"/>
-            <Button x:Name="buttonDeleteQuestion" Content="Delete question" Width="200" Margin="5"/>            
+            <Button x:Name="buttonDeleteQuestion" Content="Delete question" Width="200" Margin="5"/>
+            <Button x:Name="buttonHome" Content="Home" Width="200" Margin="5" Click="buttonHome_Click"/>
         </StackPanel>
     </Grid>
 </Page>

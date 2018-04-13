@@ -22,14 +22,18 @@ namespace QuizAdmin.UI
     public partial class QuestionListPage : Page
     {
         IRepository<Question> questionsRepo = Factory.Default.GetRepository<Question>();
-        List<Question> questions;
+
+        public Action GoHome;
 
         public QuestionListPage()
         {
             InitializeComponent();            
             listboxQuestions.ItemsSource = questionsRepo.Data.OrderByDescending(a => a.Date);
+        }
 
-
+        private void buttonHome_Click(object sender, RoutedEventArgs e)
+        {
+            GoHome?.Invoke();
         }
     }
 }
