@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QuizAdmin.Logic;
+
 
 namespace QuizAdmin.UI
 {
@@ -20,9 +22,24 @@ namespace QuizAdmin.UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        IRepository<Question> questionRepository = Factory.Default.GetRepository<Question>();
+    
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var question = new Question()
+            {
+                Date = DateTime.Now.Date,
+                Text = "Are you a robot?",
+                Explanation = "No, I am an idiot"
+            };
+            questionRepository.AddItem(question);
+            int id = question.Id;
         }
     }
 }
