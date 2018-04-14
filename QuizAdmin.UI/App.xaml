@@ -10,6 +10,11 @@
             <Setter Property="Background" Value="#818A8F"/>
         </Style>
         <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1.8" ScaleY="1.8" />
+                </Setter.Value>
+            </Setter>
             <Setter Property="Background" Value="#818A8F"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
