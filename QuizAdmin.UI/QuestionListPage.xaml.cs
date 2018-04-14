@@ -37,6 +37,7 @@ namespace QuizAdmin.UI
 
         private void buttonHome_Click(object sender, RoutedEventArgs e)
         {
+            listboxQuestions.SelectedIndex = -1;
             GoHome?.Invoke();
         }
 
@@ -50,14 +51,33 @@ namespace QuizAdmin.UI
         private void buttonDeleteQuestion_Click(object sender, RoutedEventArgs e)
         {
             var question = listboxQuestions.SelectedItem as Question;
-            var answers = answerRepo.FindAll(a => a.Question_Id == question.Id);
+            if (question != null)
+            {
+                var answers = answerRepo.FindAll(a => a.Question_Id == question.Id);
 
-            foreach (var item in answers)
-                answerRepo.RemoveItem(item);
+                foreach (var item in answers)
+                    answerRepo.RemoveItem(item);
 
-            questionsRepo.RemoveItem(question);
+                questionsRepo.RemoveItem(question);
+            }            
 
             RefreshListBox();
+        }
+
+        private void listboxQuestions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (listboxQuestions.SelectedIndex == -1)
+            {
+                buttonEditQuestion.IsEnabled = false;
+                buttonDeleteQuestion.IsEnabled = false;
+                buttonViewStats.IsEnabled = false;
+            }
+            else
+            {
+                buttonEditQuestion.IsEnabled = true;
+                buttonDeleteQuestion.IsEnabled = true;
+                buttonViewStats.IsEnabled = true;
+            }
         }
     }
 }
