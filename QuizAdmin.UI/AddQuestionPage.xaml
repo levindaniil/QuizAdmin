@@ -17,25 +17,27 @@
         <StackPanel VerticalAlignment="Stretch" Orientation="Vertical">
             <TextBlock Text="Add new question" Margin="30 0 0 0" VerticalAlignment="Top" FontSize="20" Foreground="White" Height="30"/>
             <TextBox x:Name="textBoxQuestionText" ToolTip="Put question's text here"  FontSize="16" Height="70" Margin="0 0 0 0" TextWrapping="Wrap"  VerticalContentAlignment="Top" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-            <CheckBox ToolTip="Mark the right answers"  HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 10 0 0" VerticalAlignment="Top" >
-                <TextBox  Height="18" FontSize="9" TextWrapping="Wrap"  ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            <CheckBox Name="checkBox1" ToolTip="Mark the right answers"  HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0 10 0 0" VerticalAlignment="Top" >
+                <TextBox Name="textBox1"  Height="18" FontSize="9" TextWrapping="Wrap"  ScrollViewer.VerticalScrollBarVisibility="Auto"/>
             </CheckBox>
-            <CheckBox ToolTip="Mark the right answers"  HorizontalContentAlignment="Stretch"  HorizontalAlignment="Stretch" Margin="0 10 0 0"  VerticalAlignment="Top" >
-                <TextBox FlowDirection="LeftToRight" Height="18" FontSize="9" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            <CheckBox Name="checkBox2" ToolTip="Mark the right answers"  HorizontalContentAlignment="Stretch"  HorizontalAlignment="Stretch" Margin="0 10 0 0"  VerticalAlignment="Top" >
+                <TextBox  Name="textBox2" FlowDirection="LeftToRight" Height="18" FontSize="9" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
             </CheckBox>
-            <CheckBox ToolTip="Mark the right answers"   HorizontalContentAlignment="Stretch"  HorizontalAlignment="Stretch" Margin="0 10 0 0"  VerticalAlignment="Top" >
-                <TextBox FlowDirection="LeftToRight" Height="18" FontSize="9" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            <CheckBox Name="checkBox3" ToolTip="Mark the right answers"   HorizontalContentAlignment="Stretch"  HorizontalAlignment="Stretch" Margin="0 10 0 0"  VerticalAlignment="Top" >
+                <TextBox  Name="textBox3" FlowDirection="LeftToRight" Height="18" FontSize="9" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
             </CheckBox>
-            <CheckBox ToolTip="Mark the right answers"  HorizontalContentAlignment="Stretch"  HorizontalAlignment="Stretch" Margin="0 10 0 0"  VerticalAlignment="Top" >
-                <TextBox FlowDirection="LeftToRight" Height="18" FontSize="9" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
+            <CheckBox Name="checkBox4" ToolTip="Mark the right answers"  HorizontalContentAlignment="Stretch"  HorizontalAlignment="Stretch" Margin="0 10 0 0"  VerticalAlignment="Top" >
+                <TextBox Name="textBox4" FlowDirection="LeftToRight" Height="18" FontSize="9" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
             </CheckBox>
-            <TextBox x:Name="textBoxEXplanation" FontSize="16"  Margin="0 10 0 0" MinHeight="150" ToolTip="Put explanation here" TextWrapping="Wrap"  VerticalContentAlignment="Top" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            <TextBox x:Name="textBoxExplanation" FontSize="16"  Margin="0 10 0 0" MinHeight="150" ToolTip="Put explanation here" TextWrapping="Wrap"  VerticalContentAlignment="Top" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
 
         </StackPanel>
 
         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="5 0 15 5" VerticalAlignment="Bottom" >
+            <DatePicker Name="datePicker" Grid.Column="1" Height="25" Language="English"  ></DatePicker>
             <Button x:Name="buttonAddQuestion" Content="Add question" Width="200" Margin="5" Click="buttonAddQuestion_Click"/>
             <Button x:Name="buttonHome" Content="Home" Width="200" Margin="5" Click="buttonHome_Click"/>
         </StackPanel>
+
     </Grid>
 </Page>

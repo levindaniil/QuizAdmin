@@ -21,15 +21,18 @@ namespace QuizAdmin.UI
     /// </summary>
     public partial class QuestionListPage : Page
     {
+        
         IRepository<Question> questionsRepo = Factory.Default.GetRepository<Question>();
         IRepository<Answer> answerRepo = Factory.Default.GetRepository<Answer>();
+       
 
         public Action GoHome;
 
         public QuestionListPage()
         {
-            InitializeComponent();            
+            InitializeComponent();
             listboxQuestions.ItemsSource = questionsRepo.Data.OrderByDescending(a => a.Date);
+            questionsRepo.QuestionAdded += a => RefreshListBox();
         }
 
         private void buttonHome_Click(object sender, RoutedEventArgs e)

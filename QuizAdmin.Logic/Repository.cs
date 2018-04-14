@@ -8,6 +8,9 @@ namespace QuizAdmin.Logic
 {
     public class Repository<T> : IRepository<T>
     {
+        public Action<Answer> AnswerAdded { get; set; }
+        public Action<Question> QuestionAdded { get; set; }
+
         protected List<T> _items;
 
         public IEnumerable<T> Data => _items ?? (_items = new List<T>());
@@ -30,6 +33,7 @@ namespace QuizAdmin.Logic
 
     public class QuestionRepository : Repository<Question>
     {
+
         public QuestionRepository()
         {
             using (var context = new Context())
@@ -47,6 +51,8 @@ namespace QuizAdmin.Logic
             }
 
             _items.Add(question);
+            QuestionAdded?.Invoke(question);
+            
         }
 
         public override void RemoveItem(Question question)
@@ -63,6 +69,7 @@ namespace QuizAdmin.Logic
 
     public class AnswerRepository : Repository<Answer>
     {
+
         public AnswerRepository()
         {
             using (var context = new Context())
@@ -79,6 +86,7 @@ namespace QuizAdmin.Logic
             }
 
             _items.Add(answer);
+            AnswerAdded?.Invoke(answer);
         }
 
         public override void RemoveItem(Answer answer)

@@ -12,5 +12,7 @@ namespace QuizAdmin.Logic
         IEnumerable<T> FindAll(Predicate<T> predicate);
         void AddItem(T item);
         void RemoveItem(T item);
+        Action<Answer> AnswerAdded { get; set; }
+        Action<Question> QuestionAdded { get; set; }
     }
 }
