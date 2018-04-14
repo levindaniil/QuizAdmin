@@ -24,5 +24,17 @@ namespace QuizAdmin.UI
         {
             InitializeComponent();
         }
+
+        private void buttonAddQuestion_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public Action GoHome;
+
+        private void buttonHome_Click(object sender, RoutedEventArgs e)
+        {
+            GoHome?.Invoke();
+        }
     }
 }

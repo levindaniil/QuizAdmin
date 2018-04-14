@@ -48,6 +48,17 @@ namespace QuizAdmin.Logic
 
             _items.Add(question);
         }
+
+        public override void RemoveItem(Question question)
+        {
+            using (var context = new Context())
+            {
+                context.Set<Question>().Remove(context.Questions.FirstOrDefault(q => q.Id == question.Id));
+                context.SaveChanges();
+            }
+
+            _items.Remove(question);
+        }
     }
 
     public class AnswerRepository : Repository<Answer>
@@ -68,6 +79,17 @@ namespace QuizAdmin.Logic
             }
 
             _items.Add(answer);
+        }
+
+        public override void RemoveItem(Answer answer)
+        {
+            using (var context = new Context())
+            {
+                context.Set<Answer>().Remove(context.Answers.FirstOrDefault(a => a.Id == answer.Id));
+                context.SaveChanges();
+            }
+
+            _items.Remove(answer);
         }
 
     }

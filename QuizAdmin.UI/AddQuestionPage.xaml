@@ -19,6 +19,10 @@
             <TextBox x:Name="textBoxQuestionText" FontSize="16" Height="100" TextWrapping="Wrap"  VerticalContentAlignment="Top" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
             
         </StackPanel>
-        
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="5 0 15 5" VerticalAlignment="Bottom" >
+            <Button x:Name="buttonAddQuestion" Content="Add question" Width="200" Margin="5" Click="buttonAddQuestion_Click"/>
+            <Button x:Name="buttonHome" Content="Home" Width="200" Margin="5" Click="buttonHome_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

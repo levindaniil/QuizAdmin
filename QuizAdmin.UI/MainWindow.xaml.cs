@@ -41,7 +41,9 @@ namespace QuizAdmin.UI
 
         private void CreateNewQuestion()
         {
-            mainFrame.NavigationService.Navigate(new AddQuestionPage());
+            var AddQuestionPage = new AddQuestionPage();
+            AddQuestionPage.GoHome += GoHome;
+            mainFrame.NavigationService.Navigate(AddQuestionPage);
         }
 
         private void GoHome()
