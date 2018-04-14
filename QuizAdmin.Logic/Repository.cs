@@ -74,7 +74,7 @@ namespace QuizAdmin.Logic
         {
             using (var context = new Context())
             {
-                _items = context.Answers.Include("Question").ToList();
+                _items = context.Answers.ToList();
             }
         }
         public override void AddItem(Answer answer)

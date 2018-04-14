@@ -45,25 +45,25 @@ namespace QuizAdmin.UI
             {
                 new Answer
                 {
-                    Question = questionsRepo.Data.FirstOrDefault(q => q.Id == id),
+                    Question_Id = id,
                     Text = textBox1.Text,
                     IsCorrect = (bool)checkBox1.IsChecked
                 },
                 new Answer
                 {
-                    Question = questionsRepo.Data.FirstOrDefault(q => q.Id == id),
+                    Question_Id = id,
                     Text = textBox2.Text,
                     IsCorrect = (bool)checkBox2.IsChecked
                 },
                 new Answer
                 {
-                    Question = questionsRepo.Data.FirstOrDefault(q => q.Id == id),
+                    Question_Id = id,
                     Text = textBox3.Text,
                     IsCorrect = (bool)checkBox3.IsChecked
                 },
                 new Answer
                 {
-                    Question = questionsRepo.Data.FirstOrDefault(q => q.Id == id),
+                    Question_Id = id,
                     Text = textBox4.Text,
                     IsCorrect = (bool)checkBox4.IsChecked
                 }
@@ -71,7 +71,7 @@ namespace QuizAdmin.UI
 
             foreach (var item in answers)
             {
-                if (item.Text != null)
+                if (!String.IsNullOrEmpty(item.Text))
                     answerRepo.AddItem(item);
             }
 

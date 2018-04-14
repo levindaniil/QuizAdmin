@@ -50,7 +50,7 @@ namespace QuizAdmin.UI
         private void buttonDeleteQuestion_Click(object sender, RoutedEventArgs e)
         {
             var question = listboxQuestions.SelectedItem as Question;
-            var answers = answerRepo.FindAll(a => a.Question.Id == question.Id);
+            var answers = answerRepo.FindAll(a => a.Question_Id == question.Id);
 
             foreach (var item in answers)
                 answerRepo.RemoveItem(item);

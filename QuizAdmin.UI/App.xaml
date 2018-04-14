@@ -4,6 +4,24 @@
              xmlns:local="clr-namespace:QuizAdmin.UI"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <Style x:Key="styleDatePicker" TargetType="{x:Type DatePickerTextBox}">
+            <Setter Property="Text" Value="Choose date" />
+        </Style>
+        <Style x:Key="styleCalendar" TargetType="{x:Type Calendar}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Calendar}">
+                        <Viewbox Height="210"
+                         Width="210">
+                            <CalendarItem x:Name="PART_CalendarItem"
+                                  Background="{TemplateBinding Background}"
+                                  BorderBrush="{TemplateBinding BorderBrush}"
+                                  BorderThickness="{TemplateBinding BorderThickness}"/>
+                        </Viewbox>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="20"/>
