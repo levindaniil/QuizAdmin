@@ -20,6 +20,13 @@ namespace QuizAdmin.Logic
             return _items.FindAll(predicate);
         }
 
+        public virtual void EditItem(Question question, DateTime date, string explanation, string text)
+        {
+            question.Date = date;
+            question.Explanation = explanation;
+            question.Text = text;
+        }
+
         public virtual void AddItem(T item)
         {
             _items.Add(item);
@@ -52,6 +59,21 @@ namespace QuizAdmin.Logic
 
             _items.Add(question);
             QuestionAdded?.Invoke(question);
+        }
+
+        public override void EditItem(Question question, DateTime date, string explanation, string text)
+        {
+            using (var context = new Context())
+            {
+
+                var questionToEdit = context.Questions.FirstOrDefault(q => q.Id == question.Id);
+                questionToEdit.Date = date;
+                questionToEdit.Explanation = explanation;
+                questionToEdit.Text = text;
+
+                QuestionAdded?.Invoke(question);
+                context.SaveChanges();
+            }
             
         }
 

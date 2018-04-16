@@ -67,13 +67,7 @@ namespace QuizAdmin.UI
 
         private void listboxQuestions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (listboxQuestions.SelectedIndex == -1)
-            {
-                buttonEditQuestion.IsEnabled = false;
-                buttonDeleteQuestion.IsEnabled = false;
-                buttonViewStats.IsEnabled = false;
-            }
-            else
+            if (listboxQuestions.SelectedIndex != -1)
             {
                 buttonEditQuestion.IsEnabled = true;
                 buttonDeleteQuestion.IsEnabled = true;

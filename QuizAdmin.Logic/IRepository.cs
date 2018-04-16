@@ -14,5 +14,6 @@ namespace QuizAdmin.Logic
         void RemoveItem(T item);
         Action<Answer> AnswerAdded { get; set; }
         Action<Question> QuestionAdded { get; set; }
+        void EditItem(Question question, DateTime date, string explanation, string text);
     }
 }

@@ -77,6 +77,7 @@ namespace QuizAdmin.UI
                     if (!String.IsNullOrEmpty(item.Text))
                         answerRepo.AddItem(item);
                 }
+                
 
                 MessageBox.Show("Your question was successefully added");
                 
@@ -84,6 +85,7 @@ namespace QuizAdmin.UI
 
             else
             {
+                questionsRepo.EditItem(question, (DateTime)datePicker.SelectedDate, textBoxExplanation.Text, textBoxQuestionText.Text);
 
             }
 
