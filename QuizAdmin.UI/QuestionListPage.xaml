@@ -46,7 +46,7 @@
         </Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="5 0 15 5" VerticalAlignment="Bottom" >
             <Button x:Name="buttonViewStats" IsEnabled="False" Content="View statistics" Width="200" Margin="5"/>
-            <Button x:Name="buttonEditQuestion" IsEnabled="False" Content="Edit question" Width="200" Margin="5"/>
+            <Button x:Name="buttonEditQuestion" IsEnabled="False" Content="Edit question" Width="200" Margin="5" Click="buttonEditQuestion_Click"/>
             <Button x:Name="buttonDeleteQuestion" IsEnabled="False" Content="Delete question" Width="200" Margin="5" Click="buttonDeleteQuestion_Click"/>
             <Button x:Name="buttonHome" Content="Home" Width="200" Margin="5" Click="buttonHome_Click"/>
         </StackPanel>

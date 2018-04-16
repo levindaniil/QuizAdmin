@@ -31,6 +31,7 @@ namespace QuizAdmin.UI
             PageFactory.Instance.PageRepository.HomePage.OpenQuestions += OpenQuestions;
             PageFactory.Instance.PageRepository.HomePage.AddQuestion += CreateNewQuestion;
             PageFactory.Instance.PageRepository.QuestionListPage.GoHome += GoHome;
+            PageFactory.Instance.PageRepository.QuestionListPage.EditWindow += EditWindow;
             mainFrame.NavigationService.Navigate(PageFactory.Instance.PageRepository.HomePage);
         }
 
@@ -41,7 +42,7 @@ namespace QuizAdmin.UI
 
         private void CreateNewQuestion()
         {
-            var AddQuestionPage = new AddQuestionPage();
+            var AddQuestionPage = new AddQuestionPage(new Question());
             AddQuestionPage.GoHome += GoHome;
             mainFrame.NavigationService.Navigate(AddQuestionPage);
         }
@@ -49,6 +50,14 @@ namespace QuizAdmin.UI
         private void GoHome()
         {
             mainFrame.NavigationService.Navigate(PageFactory.Instance.PageRepository.HomePage);
+        }
+
+        private void EditWindow(Question question)
+        {
+            var AddQuestionPage = new AddQuestionPage(question);
+            AddQuestionPage.GoHome += GoHome;
+            AddQuestionPage.buttonAddQuestion.Content = "Edit question";
+            mainFrame.NavigationService.Navigate(AddQuestionPage);
         }
 
         

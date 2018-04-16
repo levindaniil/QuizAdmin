@@ -27,6 +27,7 @@ namespace QuizAdmin.UI
        
 
         public Action GoHome;
+        public Action<Question> EditWindow;
 
         public QuestionListPage()
         {
@@ -77,6 +78,17 @@ namespace QuizAdmin.UI
                 buttonEditQuestion.IsEnabled = true;
                 buttonDeleteQuestion.IsEnabled = true;
                 buttonViewStats.IsEnabled = true;
+            }
+        }
+
+        private void buttonEditQuestion_Click(object sender, RoutedEventArgs e)
+        {
+            var chQ = listboxQuestions.SelectedItem as Question;
+            if (chQ == null)
+                MessageBox.Show("Choose question", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+            {
+                EditWindow?.Invoke(chQ);
             }
         }
     }

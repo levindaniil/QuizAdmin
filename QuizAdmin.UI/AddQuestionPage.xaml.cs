@@ -23,25 +23,28 @@ namespace QuizAdmin.UI
     {
         IRepository<Question> questionsRepo = Factory.Default.GetRepository<Question>();
         IRepository<Answer> answerRepo = Factory.Default.GetRepository<Answer>();
+        Question question;
 
-        public AddQuestionPage()
+        public AddQuestionPage(Question _question)
         {
             InitializeComponent();
-            
+            question = _question;
         }
 
         private void buttonAddQuestion_Click(object sender, RoutedEventArgs e)
         {
-            var question = new Question
+            if(question.Id == 0)
             {
+                var newQuestion = new Question
+                {
 
-                Date = (DateTime)datePicker.SelectedDate,
-                Text = textBoxQuestionText.Text,
-                Explanation = textBoxExplanation.Text
-            };
-            questionsRepo.AddItem(question);
-            int id = question.Id;
-            List<Answer> answers = new List<Answer>
+                    Date = (DateTime)datePicker.SelectedDate,
+                    Text = textBoxQuestionText.Text,
+                    Explanation = textBoxExplanation.Text
+                };
+                questionsRepo.AddItem(newQuestion);
+                int id = newQuestion.Id;
+                List<Answer> answers = new List<Answer>
             {
                 new Answer
                 {
@@ -69,13 +72,21 @@ namespace QuizAdmin.UI
                 }
             };
 
-            foreach (var item in answers)
-            {
-                if (!String.IsNullOrEmpty(item.Text))
-                    answerRepo.AddItem(item);
+                foreach (var item in answers)
+                {
+                    if (!String.IsNullOrEmpty(item.Text))
+                        answerRepo.AddItem(item);
+                }
+
+                MessageBox.Show("Your question was successefully added");
+                
             }
 
-            MessageBox.Show("You question was successefully added");
+            else
+            {
+
+            }
+
             GoHome?.Invoke();
         }
 
@@ -87,6 +98,44 @@ namespace QuizAdmin.UI
         private void buttonHome_Click(object sender, RoutedEventArgs e)
         {
             GoHome?.Invoke();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (question.Id != 0)
+            {
+                textBoxQuestionText.Text = question.Text;
+                var answers = answerRepo.Data.ToList().FindAll(a => a.Question_Id == question.Id).ToList();
+                List<CheckBox> checkBoxes = new List<CheckBox>();
+
+                foreach (var item in stackPanelNewQuestion.Children)
+                    if (item is CheckBox)
+                        checkBoxes.Add(item as CheckBox);
+
+                FillChBs(checkBoxes, answers);
+
+                textBoxExplanation.Text = question.Explanation;
+                datePicker.SelectedDate = question.Date;
+            }
+        }
+
+        private void FillChBs(List<CheckBox> chbs, List<Answer> answers)
+        {
+            var c = answers.Count();
+            if (c > 4)
+            {
+                MessageBox.Show("Too many answers, can't display all");
+                c = 4;
+            }
+
+            for (int i = 0; i < c; i++)
+            {
+                var cb = chbs.FirstOrDefault(a => a.Name.Contains((i + 1).ToString()));
+                var tb = cb.Content as TextBox;
+                tb.Text = answers[i].Text;
+                cb.Content = tb;
+                cb.IsChecked = answers[i].IsCorrect;
+            }
         }
     }
 }
