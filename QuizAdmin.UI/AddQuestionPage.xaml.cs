@@ -21,19 +21,22 @@ namespace QuizAdmin.UI
     /// </summary>
     public partial class AddQuestionPage : Page
     {
-        IRepository<Question> questionsRepo = Factory.Default.GetRepository<Question>();
-        IRepository<Answer> answerRepo = Factory.Default.GetRepository<Answer>();
+        QuestionRepository questionsRepo = Factory.Default.GetRepository<Question>() as QuestionRepository;
+        AnswerRepository answerRepo = Factory.Default.GetRepository<Answer>() as AnswerRepository;
+        Dictionary<string, int> chbAnswerDict;
+        
         Question question;
 
         public AddQuestionPage(Question _question)
         {
             InitializeComponent();
             question = _question;
+            chbAnswerDict = new Dictionary<string, int>(); 
         }
 
         private void buttonAddQuestion_Click(object sender, RoutedEventArgs e)
         {
-            if(question.Id == 0)
+            if (question.Id == 0)
             {
                 var newQuestion = new Question
                 {
@@ -87,6 +90,13 @@ namespace QuizAdmin.UI
             {
                 questionsRepo.EditItem(question, (DateTime)datePicker.SelectedDate, textBoxExplanation.Text, textBoxQuestionText.Text);
 
+                var checkBoxes = GetCheckBoxes();
+                foreach (var answer in answerRepo.Data.ToList().FindAll(a => a.Question_Id == question.Id))
+                {
+                    CheckBox cb = checkBoxes.FirstOrDefault(c => chbAnswerDict[c.Name] == answer.Id);
+                    var tb = cb.Content as TextBox;
+                    answerRepo.EditAnswer(answer, (bool)cb.IsChecked, tb.Text);
+                }
             }
 
             GoHome?.Invoke();
@@ -108,11 +118,7 @@ namespace QuizAdmin.UI
             {
                 textBoxQuestionText.Text = question.Text;
                 var answers = answerRepo.Data.ToList().FindAll(a => a.Question_Id == question.Id).ToList();
-                List<CheckBox> checkBoxes = new List<CheckBox>();
-
-                foreach (var item in stackPanelNewQuestion.Children)
-                    if (item is CheckBox)
-                        checkBoxes.Add(item as CheckBox);
+                List<CheckBox> checkBoxes = GetCheckBoxes();
 
                 FillChBs(checkBoxes, answers);
 
@@ -137,7 +143,18 @@ namespace QuizAdmin.UI
                 tb.Text = answers[i].Text;
                 cb.Content = tb;
                 cb.IsChecked = answers[i].IsCorrect;
+                chbAnswerDict.Add(cb.Name, answers[i].Id);
             }
+        }
+
+        private List<CheckBox> GetCheckBoxes()
+        {
+            var checkBoxes = new List<CheckBox>();
+            foreach (var item in stackPanelNewQuestion.Children)
+                if (item is CheckBox)
+                    checkBoxes.Add(item as CheckBox);
+
+            return checkBoxes;
         }
     }
 }
