@@ -91,12 +91,13 @@ namespace QuizAdmin.UI
                 questionsRepo.EditItem(question, (DateTime)datePicker.SelectedDate, textBoxExplanation.Text, textBoxQuestionText.Text);
 
                 var checkBoxes = GetCheckBoxes();
-                foreach (var answer in answerRepo.Data.ToList().FindAll(a => a.Question_Id == question.Id))
+                foreach (var answer in answerRepo.Data.ToList().FindAll(a =>chbAnswerDict.Values.Contains(a.Id)))
                 {
                     CheckBox cb = checkBoxes.FirstOrDefault(c => chbAnswerDict[c.Name] == answer.Id);
                     var tb = cb.Content as TextBox;
                     answerRepo.EditAnswer(answer, (bool)cb.IsChecked, tb.Text);
                 }
+
             }
 
             GoHome?.Invoke();
