@@ -37,7 +37,6 @@ namespace QuizAdmin.UI
             {
                 var newQuestion = new Question
                 {
-
                     Date = (DateTime)datePicker.SelectedDate,
                     Text = textBoxQuestionText.Text,
                     Explanation = textBoxExplanation.Text
@@ -81,6 +80,8 @@ namespace QuizAdmin.UI
                 MessageBox.Show("Your question was successefully added");
                 
             }
+
+            //редактирование вопроса и ответов к нему
 
             else
             {
