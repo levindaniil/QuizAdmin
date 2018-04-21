@@ -52,6 +52,24 @@ namespace QuizAdmin.Logic
 
             _items.Add(question);
             QuestionAdded?.Invoke(question);
+        }
+
+        public  void EditItem(Question question, DateTime date, string explanation, string text)
+        {
+            using (var context = new Context())
+            {
+                question.Date = date;
+                question.Explanation = explanation;
+                question.Text = text;
+
+                var questionToEdit = context.Questions.FirstOrDefault(q => q.Id == question.Id);
+                questionToEdit.Date = date;
+                questionToEdit.Explanation = explanation;
+                questionToEdit.Text = text;
+
+                QuestionAdded?.Invoke(question);
+                context.SaveChanges();
+            }
             
         }
 
@@ -77,6 +95,7 @@ namespace QuizAdmin.Logic
                 _items = context.Answers.ToList();
             }
         }
+
         public override void AddItem(Answer answer)
         {
             using (var context = new Context())
@@ -87,6 +106,20 @@ namespace QuizAdmin.Logic
 
             _items.Add(answer);
             AnswerAdded?.Invoke(answer);
+        }
+
+        public void EditAnswer(Answer answer, bool iscorrect,string text)
+        {
+            using (var context = new Context())
+            {
+                answer.IsCorrect = iscorrect;
+                answer.Text = text;
+
+                var answerToEdit = context.Answers.FirstOrDefault(a => a.Id == answer.Id);
+                answerToEdit.IsCorrect = iscorrect;
+                answerToEdit.Text = text;
+                context.SaveChanges();
+            }
         }
 
         public override void RemoveItem(Answer answer)

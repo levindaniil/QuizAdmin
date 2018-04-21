@@ -23,7 +23,6 @@ namespace QuizAdmin.UI
     public partial class MainWindow : Window
     {
         IRepository<Question> questionRepository = Factory.Default.GetRepository<Question>();
-    
 
         public MainWindow()
         {
