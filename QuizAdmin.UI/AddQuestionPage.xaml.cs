@@ -90,6 +90,7 @@ namespace QuizAdmin.UI
             else
             {
                 questionsRepo.EditItem(question, (DateTime)datePicker.SelectedDate, textBoxExplanation.Text, textBoxQuestionText.Text);
+                //int q_id;
 
                 var checkBoxes = GetCheckBoxes();
                 foreach (var answer in answerRepo.Data.ToList().FindAll(a =>chbAnswerDict.Values.Contains(a.Id)))
@@ -97,7 +98,9 @@ namespace QuizAdmin.UI
                     CheckBox cb = checkBoxes.FirstOrDefault(c => chbAnswerDict[c.Name] == answer.Id);
                     var tb = cb.Content as TextBox;
                     answerRepo.EditAnswer(answer, (bool)cb.IsChecked, tb.Text);
+                    //q_id = answer.Question_Id;
                 }
+
 
             }
 
