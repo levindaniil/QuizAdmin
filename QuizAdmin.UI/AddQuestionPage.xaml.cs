@@ -80,10 +80,8 @@ namespace QuizAdmin.UI
                         answerRepo.AddItem(item);
                 }
                 
-
                 MessageBox.Show("Your question was successefully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 GoHome?.Invoke();
-
             }
 
             //редактирование вопроса и ответов к нему
@@ -110,7 +108,31 @@ namespace QuizAdmin.UI
                     else
                         answerRepo.RemoveItem(answer);
 
-                    
+                    checkBoxes.Remove(cb);
+                }
+
+                if (checkBoxes.Count > 0)
+                {
+                    foreach (var cb in checkBoxes)
+                    {
+                        var tb = cb.Content as TextBox;
+                        if (!String.IsNullOrEmpty(tb.Text))
+                        {
+                            Answer newAnswer = new Answer
+                            {
+                                Text = tb.Text,
+                                Question_Id = question.Id,
+                                IsCorrect = (bool)cb.IsChecked
+                            };
+                            answerRepo.AddItem(newAnswer);
+                        }
+                        else if (String.IsNullOrEmpty(tb.Text)&& (bool)cb.IsChecked)
+                        {
+                            MessageBox.Show("You can't pick empty answer as a correct one", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            res = false;
+                        }
+                            
+                    }
                 }
 
                 if (res)
@@ -118,15 +140,9 @@ namespace QuizAdmin.UI
                     MessageBox.Show("Your question was successefully edited", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     GoHome?.Invoke();
                 }
-
-
             }
-
             
         }
-
-
-
 
         public Action GoHome;
 

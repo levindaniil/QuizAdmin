@@ -73,6 +73,13 @@ namespace QuizAdmin.UI
                 buttonDeleteQuestion.IsEnabled = true;
                 buttonViewStats.IsEnabled = true;
             }
+
+            if(listboxQuestions.SelectedIndex == -1)
+            {
+                buttonEditQuestion.IsEnabled = false;
+                buttonDeleteQuestion.IsEnabled = false;
+                buttonViewStats.IsEnabled = false;
+            }
         }
 
         private void buttonEditQuestion_Click(object sender, RoutedEventArgs e)
