@@ -81,8 +81,9 @@ namespace QuizAdmin.UI
                 }
                 
 
-                MessageBox.Show("Your question was successefully added");
-                
+                MessageBox.Show("Your question was successefully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                GoHome?.Invoke();
+
             }
 
             //редактирование вопроса и ответов к нему
@@ -90,21 +91,38 @@ namespace QuizAdmin.UI
             else
             {
                 questionsRepo.EditItem(question, (DateTime)datePicker.SelectedDate, textBoxExplanation.Text, textBoxQuestionText.Text);
-                //int q_id;
+                bool res = true;
 
                 var checkBoxes = GetCheckBoxes();
                 foreach (var answer in answerRepo.Data.ToList().FindAll(a =>chbAnswerDict.Values.Contains(a.Id)))
                 {
                     CheckBox cb = checkBoxes.FirstOrDefault(c => chbAnswerDict[c.Name] == answer.Id);
                     var tb = cb.Content as TextBox;
-                    answerRepo.EditAnswer(answer, (bool)cb.IsChecked, tb.Text);
-                    //q_id = answer.Question_Id;
+                    if (!String.IsNullOrEmpty(tb.Text))
+                        answerRepo.EditAnswer(answer, (bool)cb.IsChecked, tb.Text);
+                        
+                    else if (String.IsNullOrEmpty(tb.Text) && (bool)cb.IsChecked)
+                    {
+                        MessageBox.Show("You can't pick empty answer as a correct one", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        res = false;
+                    }
+
+                    else
+                        answerRepo.RemoveItem(answer);
+
+                    
+                }
+
+                if (res)
+                {
+                    MessageBox.Show("Your question was successefully edited", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    GoHome?.Invoke();
                 }
 
 
             }
 
-            GoHome?.Invoke();
+            
         }
 
 
@@ -137,7 +155,7 @@ namespace QuizAdmin.UI
             var c = answers.Count();
             if (c > 4)
             {
-                MessageBox.Show("Too many answers, can't display all");
+                MessageBox.Show("Too many answers, can't display all", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 c = 4;
             }
 
