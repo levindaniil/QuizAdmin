@@ -109,7 +109,6 @@ namespace QuizAdmin.UI
 
                     else
                         answerRepo.RemoveItem(answer);
-
                     
                 }
 
@@ -118,11 +117,7 @@ namespace QuizAdmin.UI
                     MessageBox.Show("Your question was successefully edited", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     GoHome?.Invoke();
                 }
-
-
             }
-
-            
         }
 
 
