@@ -54,12 +54,16 @@ namespace QuizAdmin.UI
             var question = listboxQuestions.SelectedItem as Question;
             if (question != null)
             {
-                var answers = answerRepo.FindAll(a => a.Question_Id == question.Id);
+                var res = MessageBox.Show("Do you want to delete the question", "Deleting question", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (res == MessageBoxResult.Yes)
+                {
+                    var answers = answerRepo.FindAll(a => a.Question_Id == question.Id);
 
-                foreach (var item in answers)
-                    answerRepo.RemoveItem(item);
+                    foreach (var item in answers)
+                        answerRepo.RemoveItem(item);
 
-                questionsRepo.RemoveItem(question);
+                    questionsRepo.RemoveItem(question);
+                }               
             }            
 
             RefreshListBox();

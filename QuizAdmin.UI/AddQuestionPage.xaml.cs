@@ -180,6 +180,7 @@ namespace QuizAdmin.UI
                 var cb = chbs.FirstOrDefault(a => a.Name.Contains((i + 1).ToString()));
                 var tb = cb.Content as TextBox;
                 tb.Text = answers[i].Text;
+                tb.ToolTip = new ToolTip { Content = "Leave an empty space to delete an answer" };
                 cb.Content = tb;
                 cb.IsChecked = answers[i].IsCorrect;
                 chbAnswerDict.Add(cb.Name, answers[i].Id);
