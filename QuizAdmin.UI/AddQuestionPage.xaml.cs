@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using QuizAdmin.Logic;
+using QuizAdmin.Logic.Model;
+using QuizAdmin.Logic.Repository;
 
 namespace QuizAdmin.UI
 {
@@ -21,8 +23,8 @@ namespace QuizAdmin.UI
     /// </summary>
     public partial class AddQuestionPage : Page
     {
-        QuestionRepository questionsRepo = Factory.Default.GetRepository<Question>() as QuestionRepository;
-        AnswerRepository answerRepo = Factory.Default.GetRepository<Answer>() as AnswerRepository;
+        IRepository<Question> questionsRepo = RepositoryFactory.Default.GetRepository<Question>() as QuestionRepository;
+        IRepository<Answer> answerRepo = RepositoryFactory.Default.GetRepository<Answer>() as AnswerRepository;
         Dictionary<string, int> chbAnswerDict;
         
         Question question;

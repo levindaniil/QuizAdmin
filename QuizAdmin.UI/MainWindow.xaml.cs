@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using QuizAdmin.Logic;
-
+using QuizAdmin.Logic.Model;
+using QuizAdmin.Logic.Repository;
 
 namespace QuizAdmin.UI
 {
@@ -22,7 +23,7 @@ namespace QuizAdmin.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        IRepository<Question> questionRepository = Factory.Default.GetRepository<Question>();
+        IRepository<Question> questionRepository = RepositoryFactory.Default.GetRepository<Question>();
 
         public MainWindow()
         {

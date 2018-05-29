@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QuizAdmin.UI"
-      xmlns:logic="clr-namespace:QuizAdmin.Logic;assembly=QuizAdmin.Logic"
+      xmlns:logic="clr-namespace:QuizAdmin.Logic;assembly=QuizAdmin.Logic"      
       mc:Ignorable="d" 
       d:DesignHeight="480" d:DesignWidth="800"
       Title="QuestionListPage">
@@ -25,7 +25,7 @@
                 </Style>
             </ListBox.ItemContainerStyle>
             <ListBox.Resources>
-                <DataTemplate DataType="{x:Type logic:Question}">
+                <DataTemplate DataType="{x:Type logic:Model.Question}">
                     <Grid x:Name="listBoxItemTemplate" HorizontalAlignment="Stretch" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80"/>

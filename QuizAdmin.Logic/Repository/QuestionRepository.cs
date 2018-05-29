@@ -1,0 +1,63 @@
+﻿using QuizAdmin.Logic.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QuizAdmin.Logic.Repository
+{
+    public class QuestionRepository :Repository<Question>
+    {
+        public QuestionRepository()
+        {
+            using (var context = new Context())
+            {
+                _items = context.Questions.ToList();
+            }
+        }
+
+        public override Question AddItem(Question question)
+        {
+            using (var context = new Context())
+            {
+                context.Set<Question>().Add(question);
+                context.SaveChanges();
+            }
+
+            _items.Add(question);
+            ItemAdded?.Invoke(question);
+            return question;
+        }
+
+        public override Question EditItem(Object id, Question item)
+        {
+            //using (var context = new Context())
+            //{
+            //    question.Date = date;
+            //    question.Explanation = explanation;
+            //    question.Text = text;
+
+            //    var questionToEdit = context.Questions.FirstOrDefault(q => q.Id == question.Id);
+            //    questionToEdit.Date = date;
+            //    questionToEdit.Explanation = explanation;
+            //    questionToEdit.Text = text;
+
+            //    ItemAdded?.Invoke(question);
+            //    context.SaveChanges();
+            //}
+            return null;
+        }
+
+        public override void RemoveItem(Question question)
+        {
+            using (var context = new Context())
+            {
+                context.Set<Question>().Remove(context.Questions.FirstOrDefault(q => q.Id == question.Id));
+                context.SaveChanges();
+            }
+
+            _items.Remove(question);
+        }
+    }
+}

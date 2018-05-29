@@ -47,18 +47,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Answer.cs" />
+    <Compile Include="Migrations\201805261439417_ModelRefactored.cs" />
+    <Compile Include="Migrations\201805261439417_ModelRefactored.Designer.cs">
+      <DependentUpon>201805261439417_ModelRefactored.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805261445275_ModelFixedAtoR.cs" />
+    <Compile Include="Migrations\201805261445275_ModelFixedAtoR.Designer.cs">
+      <DependentUpon>201805261445275_ModelFixedAtoR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805261511486_QuestionRefactored.cs" />
+    <Compile Include="Migrations\201805261511486_QuestionRefactored.Designer.cs">
+      <DependentUpon>201805261511486_QuestionRefactored.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805261526346_ManyToManyRefactored.cs" />
+    <Compile Include="Migrations\201805261526346_ManyToManyRefactored.Designer.cs">
+      <DependentUpon>201805261526346_ManyToManyRefactored.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Answer.cs" />
     <Compile Include="Context.cs" />
-    <Compile Include="Factory.cs" />
-    <Compile Include="IRepository.cs" />
+    <Compile Include="Repository\AnswerRepository.cs" />
+    <Compile Include="Repository\QuestionRepository.cs" />
+    <Compile Include="Repository\ReportRepository.cs" />
+    <Compile Include="Repository\RepositoryFactory.cs" />
+    <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Migrations\201804141546022_Q_id.cs" />
     <Compile Include="Migrations\201804141546022_Q_id.Designer.cs">
       <DependentUpon>201804141546022_Q_id.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Question.cs" />
+    <Compile Include="Model\Question.cs" />
+    <Compile Include="Model\Report.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository.cs" />
+    <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -67,6 +89,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201804141546022_Q_id.resx">
       <DependentUpon>201804141546022_Q_id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805261439417_ModelRefactored.resx">
+      <DependentUpon>201805261439417_ModelRefactored.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805261445275_ModelFixedAtoR.resx">
+      <DependentUpon>201805261445275_ModelFixedAtoR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805261511486_QuestionRefactored.resx">
+      <DependentUpon>201805261511486_QuestionRefactored.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805261526346_ManyToManyRefactored.resx">
+      <DependentUpon>201805261526346_ManyToManyRefactored.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

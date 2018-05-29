@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using QuizAdmin.Logic;
+using QuizAdmin.Logic.Model;
+using QuizAdmin.Logic.Repository;
 
 namespace QuizAdmin.UI
 {
@@ -22,8 +24,8 @@ namespace QuizAdmin.UI
     public partial class QuestionListPage : Page
     {
         
-        IRepository<Question> questionsRepo = Factory.Default.GetRepository<Question>();
-        IRepository<Answer> answerRepo = Factory.Default.GetRepository<Answer>();
+        IRepository<Question> questionsRepo = RepositoryFactory.Default.GetRepository<Question>();
+        IRepository<Answer> answerRepo = RepositoryFactory.Default.GetRepository<Answer>();
        
 
         public Action GoHome;
@@ -33,7 +35,7 @@ namespace QuizAdmin.UI
         {
             InitializeComponent();
             listboxQuestions.ItemsSource = questionsRepo.Data.OrderByDescending(a => a.Date);
-            questionsRepo.QuestionAdded += a => RefreshListBox();
+            questionsRepo.ItemAdded += a => RefreshListBox();
         }
 
         private void buttonHome_Click(object sender, RoutedEventArgs e)
@@ -57,7 +59,7 @@ namespace QuizAdmin.UI
                 var res = MessageBox.Show("Do you want to delete the question", "Deleting question", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (res == MessageBoxResult.Yes)
                 {
-                    var answers = answerRepo.FindAll(a => a.Question_Id == question.Id);
+                    var answers = questionsRepo.Data.FirstOrDefault(q => q.Id == question.Id).Answers.ToList();                    
 
                     foreach (var item in answers)
                         answerRepo.RemoveItem(item);

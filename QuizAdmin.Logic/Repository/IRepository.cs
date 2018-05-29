@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using QuizAdmin.Logic.Model;
 
-namespace QuizAdmin.Logic
+namespace QuizAdmin.Logic.Repository
 {
    public interface IRepository<T>
     {
         IEnumerable<T> Data { get; }
         IEnumerable<T> FindAll(Predicate<T> predicate);
-        void AddItem(T item);
+        T AddItem(T item);
         void RemoveItem(T item);
-        Action<Answer> AnswerAdded { get; set; }
-        Action<Question> QuestionAdded { get; set; }
+        T EditItem(Object id, T item);
+        Action<T> ItemAdded { get; set; }
     }
 }
