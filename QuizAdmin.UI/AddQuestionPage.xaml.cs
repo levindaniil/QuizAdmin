@@ -44,43 +44,40 @@ namespace QuizAdmin.UI
                 {
                     Date = (DateTime)datePicker.SelectedDate,
                     Text = textBoxQuestionText.Text,
-                    Explanation = textBoxExplanation.Text
+                    Explanation = textBoxExplanation.Text,
                 };
-                questionsRepo.AddItem(newQuestion);
-                int id = newQuestion.Id;
+
                 List<Answer> answers = new List<Answer>
             {
                 new Answer
                 {
-                    Question_Id = id,
                     Text = textBox1.Text,
                     IsCorrect = (bool)checkBox1.IsChecked
                 },
                 new Answer
                 {
-                    Question_Id = id,
                     Text = textBox2.Text,
                     IsCorrect = (bool)checkBox2.IsChecked
                 },
                 new Answer
                 {
-                    Question_Id = id,
                     Text = textBox3.Text,
                     IsCorrect = (bool)checkBox3.IsChecked
                 },
                 new Answer
                 {
-                    Question_Id = id,
                     Text = textBox4.Text,
                     IsCorrect = (bool)checkBox4.IsChecked
                 }
             };
-
                 foreach (var item in answers)
                 {
                     if (!String.IsNullOrEmpty(item.Text))
                         answerRepo.AddItem(item);
                 }
+
+                newQuestion.Answers = answers;
+                questionsRepo.AddItem(newQuestion);
                 
                 MessageBox.Show("Your question was successefully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 GoHome?.Invoke();
@@ -90,17 +87,24 @@ namespace QuizAdmin.UI
 
             else
             {
-                questionsRepo.EditItem(question, (DateTime)datePicker.SelectedDate, textBoxExplanation.Text, textBoxQuestionText.Text);
+                question.Date = (DateTime)datePicker.SelectedDate;
+                question.Explanation = textBoxExplanation.Text;
+                question.Text = textBoxQuestionText.Text;
+                questionsRepo.EditItem(question, question.Id);
                 bool res = true;
 
                 var checkBoxes = GetCheckBoxes();
-                foreach (var answer in answerRepo.Data.ToList().FindAll(a =>chbAnswerDict.Values.Contains(a.Id)))
+                foreach (var answer in question.Answers)
                 {
                     CheckBox cb = checkBoxes.FirstOrDefault(c => chbAnswerDict[c.Name] == answer.Id);
                     var tb = cb.Content as TextBox;
                     if (!String.IsNullOrEmpty(tb.Text))
-                        answerRepo.EditAnswer(answer, (bool)cb.IsChecked, tb.Text);
-                        
+                    {
+                        answer.Text = tb.Text;
+                        answer.IsCorrect = (bool)cb.IsChecked;
+                        answerRepo.EditItem(answer, answer.Id);
+                    }
+
                     else if (String.IsNullOrEmpty(tb.Text) && (bool)cb.IsChecked)
                     {
                         MessageBox.Show("You can't pick empty answer as a correct one", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -123,7 +127,6 @@ namespace QuizAdmin.UI
                             Answer newAnswer = new Answer
                             {
                                 Text = tb.Text,
-                                Question_Id = question.Id,
                                 IsCorrect = (bool)cb.IsChecked
                             };
                             answerRepo.AddItem(newAnswer);
@@ -158,7 +161,7 @@ namespace QuizAdmin.UI
             if (question.Id != 0)
             {
                 textBoxQuestionText.Text = question.Text;
-                var answers = answerRepo.Data.ToList().FindAll(a => a.Question_Id == question.Id).ToList();
+                var answers = question.Answers;
                 List<CheckBox> checkBoxes = GetCheckBoxes();
 
                 FillChBs(checkBoxes, answers);

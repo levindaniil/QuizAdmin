@@ -30,7 +30,7 @@ namespace QuizAdmin.Logic.Repository
             return item;
         }
 
-        public override User EditItem(object id, User item)
+        public override User EditItem(User item, object id)
         {
             throw new NotImplementedException();
         }

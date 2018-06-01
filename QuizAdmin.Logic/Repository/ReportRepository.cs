@@ -23,7 +23,7 @@ namespace QuizAdmin.Logic.Repository
             return item;
         }
 
-        public override Report EditItem(object id, Report item)
+        public override Report EditItem(Report item, object id)
         {
             Report report;
             using (var context = new Context())

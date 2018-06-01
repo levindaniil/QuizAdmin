@@ -31,12 +31,12 @@ namespace QuizAdmin.Logic.Repository
             return answer;
         }
 
-        public override Answer EditItem(Object id, Answer item)
+        public override Answer EditItem(Answer item, object id)
         {
             Answer answer;
             using (var context = new Context())
             {
-                answer = context.Answers.FirstOrDefault(a => a.Id == (int)id);
+                answer = context.Answers.FirstOrDefault(a => a.Id == item.Id);
                 answer.IsCorrect = item.IsCorrect;
                 answer.Text = item.Text;
                 context.SaveChanges();

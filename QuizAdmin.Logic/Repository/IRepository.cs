@@ -13,7 +13,8 @@ namespace QuizAdmin.Logic.Repository
         IEnumerable<T> FindAll(Predicate<T> predicate);
         T AddItem(T item);
         void RemoveItem(T item);
-        T EditItem(Object id, T item);
+        T EditItem(T item, object id);
         Action<T> ItemAdded { get; set; }
+
     }
 }

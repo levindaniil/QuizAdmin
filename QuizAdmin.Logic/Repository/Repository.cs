@@ -31,6 +31,6 @@ namespace QuizAdmin.Logic.Repository
             _items.Remove(item);
         }
 
-        public abstract T EditItem(Object id, T item);
+        public abstract T EditItem(T item, object id);
     }
 }

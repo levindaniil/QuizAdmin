@@ -30,22 +30,18 @@ namespace QuizAdmin.Logic.Repository
             return question;
         }
 
-        public override Question EditItem(Object id, Question item)
+        public override Question EditItem(Question question, object id)
         {
-            //using (var context = new Context())
-            //{
-            //    question.Date = date;
-            //    question.Explanation = explanation;
-            //    question.Text = text;
+            using (var context = new Context())
+            {
+                var questionToEdit = context.Questions.FirstOrDefault(q => q.Id == question.Id);
+                questionToEdit.Date = question.Date;
+                questionToEdit.Explanation = question.Explanation;
+                questionToEdit.Text = question.Text;
 
-            //    var questionToEdit = context.Questions.FirstOrDefault(q => q.Id == question.Id);
-            //    questionToEdit.Date = date;
-            //    questionToEdit.Explanation = explanation;
-            //    questionToEdit.Text = text;
-
-            //    ItemAdded?.Invoke(question);
-            //    context.SaveChanges();
-            //}
+                ItemAdded?.Invoke(question);
+                context.SaveChanges();
+            }
             return null;
         }
 
