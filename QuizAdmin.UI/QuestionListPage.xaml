@@ -24,24 +24,24 @@
                     
                 </Style>
             </ListBox.ItemContainerStyle>
-            <ListBox.Resources>
-                <DataTemplate DataType="{x:Type logic:Model.Question}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="x:type logic=Model.Question">
                     <Grid x:Name="listBoxItemTemplate" HorizontalAlignment="Stretch" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="20"/>
-                        </Grid.RowDefinitions>
-                        <TextBlock x:Name="textBlockText" TextWrapping="Wrap" Text="{Binding Text}" Grid.Column="1"   FontSize="14"/>
-                        <TextBlock x:Name="textBlockDate" Text="{Binding ShortDate}" Grid.Row="1" Grid.Column="1"  FontSize="14"/>
-                        <TextBlock Text="Question:" VerticalAlignment="Top" FontWeight="Bold" Margin="0 0 3 0"  HorizontalAlignment="Left"  FontSize="14"/>
-                        <TextBlock Text="Date:    " FontWeight="Bold" Grid.Row="1" Margin="0 0 3 0"  HorizontalAlignment="Left"  FontSize="14"/>
-                    </Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" MinHeight="20">
+                                <TextBlock Text="Date:    " FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="Question: " FontWeight="Bold" FontSize="14"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" MinHeight="20">
+                                <TextBlock x:Name="textBlockDate" Text="{Binding ShortDate}"  FontSize="14"/>
+                                <TextBlock x:Name="textBlockText" TextWrapping="Wrap" Text="{Binding Text}" FontSize="14"/>
+                            </StackPanel>
+                        </Grid>
                 </DataTemplate>
-            </ListBox.Resources>
+            </ListBox.ItemTemplate>
         </ListBox>
         </Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="5 0 15 5" VerticalAlignment="Bottom" >

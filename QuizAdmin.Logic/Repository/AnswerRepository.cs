@@ -36,12 +36,16 @@ namespace QuizAdmin.Logic.Repository
             Answer answer;
             using (var context = new Context())
             {
-                answer = context.Answers.FirstOrDefault(a => a.Id == (int)id);
-                answer.IsCorrect = item.IsCorrect;
-                answer.Text = item.Text;
-                context.SaveChanges();
+                if (!(String.IsNullOrEmpty(item.Text)))
+                {
+                    answer = context.Answers.FirstOrDefault(a => a.Id == (int)id);
+                    answer.IsCorrect = item.IsCorrect;
+                    answer.Text = item.Text;
+                    context.SaveChanges();
+                    return answer;
+                }
             }
-            return answer;
+            return null;
         }
 
         public override void RemoveItem(Answer answer)

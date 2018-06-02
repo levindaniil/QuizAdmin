@@ -112,8 +112,10 @@ namespace QuizAdmin.UI
                     }
 
                     else
+                    {
                         answerRepo.RemoveItem(answer);
-
+                        answer.Text = null;
+                    }
                     checkBoxes.Remove(cb);
                 }
 
@@ -161,13 +163,16 @@ namespace QuizAdmin.UI
             if (question.Id != 0)
             {
                 textBoxQuestionText.Text = question.Text;
-                var answers = question.Answers;
-                List<CheckBox> checkBoxes = GetCheckBoxes();
+                if (question != null)
+                {
+                    var answers = question.Answers;
+                    List<CheckBox> checkBoxes = GetCheckBoxes();
 
-                FillChBs(checkBoxes, answers);
+                    FillChBs(checkBoxes, answers);
 
-                textBoxExplanation.Text = question.Explanation;
-                datePicker.SelectedDate = question.Date;
+                    textBoxExplanation.Text = question.Explanation;
+                    datePicker.SelectedDate = question.Date;
+                }
             }
         }
 

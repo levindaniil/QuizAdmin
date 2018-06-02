@@ -27,6 +27,7 @@ namespace QuizAdmin.UI
 
         public Action OpenQuestions;
         public Action AddQuestion;
+        public Action OpenStatistics;
 
         private void buttonViewQuestions_Click(object sender, RoutedEventArgs e)
         {
@@ -36,6 +37,11 @@ namespace QuizAdmin.UI
         private void buttonAddQuestion_Click(object sender, RoutedEventArgs e)
         {
             AddQuestion?.Invoke();
+        }
+
+        private void buttonViewStats_Click(object sender, RoutedEventArgs e)
+        {
+            OpenStatistics?.Invoke();
         }
     }
 }

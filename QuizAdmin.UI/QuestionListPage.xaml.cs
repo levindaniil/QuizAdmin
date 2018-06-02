@@ -65,10 +65,10 @@ namespace QuizAdmin.UI
                         answerRepo.RemoveItem(item);
 
                     questionsRepo.RemoveItem(question);
+                    RefreshListBox();
                 }               
             }            
-
-            RefreshListBox();
+            
         }
 
         private void listboxQuestions_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -97,6 +97,7 @@ namespace QuizAdmin.UI
             {
                 EditWindow?.Invoke(chQ);
             }
+            RefreshListBox();
         }
     }
 }

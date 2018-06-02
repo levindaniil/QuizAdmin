@@ -13,7 +13,7 @@
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" >
             <Button x:Name="buttonAddQuestion" Content="Add question" FontSize="20" Height="40" Margin="10" Width="300" Click="buttonAddQuestion_Click"/>
             <Button x:Name="buttonViewQuestions" Content="View questions" FontSize="20" Height="40" Margin="10" Width="300" Click="buttonViewQuestions_Click"/>
-            <Button x:Name="buttonViewStats" Content="View statistics" FontSize="20" Height="40" Margin="10" Width="300"/>
+            <Button x:Name="buttonViewStats" Content="View statistics" FontSize="20" Height="40" Margin="10" Width="300" Click="buttonViewStats_Click"/>
         </StackPanel>
     </Grid>
 </Page>
