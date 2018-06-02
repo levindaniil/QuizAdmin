@@ -36,7 +36,7 @@ namespace QuizAdmin.Logic.Repository
             Answer answer;
             using (var context = new Context())
             {
-                answer = context.Answers.FirstOrDefault(a => a.Id == item.Id);
+                answer = context.Answers.FirstOrDefault(a => a.Id == (int)id);
                 answer.IsCorrect = item.IsCorrect;
                 answer.Text = item.Text;
                 context.SaveChanges();

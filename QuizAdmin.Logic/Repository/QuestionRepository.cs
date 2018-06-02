@@ -13,7 +13,7 @@ namespace QuizAdmin.Logic.Repository
         {
             using (var context = new Context())
             {
-                _items = context.Questions.ToList();
+                _items = context.Questions.Include("Answers").ToList();
             }
         }
 
@@ -34,7 +34,7 @@ namespace QuizAdmin.Logic.Repository
         {
             using (var context = new Context())
             {
-                var questionToEdit = context.Questions.FirstOrDefault(q => q.Id == question.Id);
+                var questionToEdit = context.Questions.FirstOrDefault(q => q.Id == (int)id);
                 questionToEdit.Date = question.Date;
                 questionToEdit.Explanation = question.Explanation;
                 questionToEdit.Text = question.Text;
