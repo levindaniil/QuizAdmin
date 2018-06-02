@@ -44,5 +44,9 @@ namespace QuizAdmin.UI
             GoHome?.Invoke();
         }
 
+        private void listboxQuestions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
