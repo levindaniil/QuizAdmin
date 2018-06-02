@@ -1,0 +1,54 @@
+﻿<Page x:Class="QuizAdmin.UI.ReportListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QuizAdmin.UI"
+      xmlns:logic="clr-namespace:QuizAdmin.Logic;assembly=QuizAdmin.Logic"      
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ReportListPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="230"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="logo.png" Grid.Column="1" VerticalAlignment="Top" Margin="10" HorizontalAlignment="Right"/>
+        <Grid  Margin="10">
+            <ListBox x:Name="listboxReports" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" SelectionChanged="listboxQuestions_SelectionChanged">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="x:type logic=Model.Report">
+                        <Grid x:Name="listBoxItemTemplate" HorizontalAlignment="Stretch" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" MinHeight="20">
+                                <TextBlock Text="Date:    " FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="User:    " FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="Question:" FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="Answers: " FontWeight="Bold" FontSize="14"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" MinHeight="20">
+                                <TextBlock x:Name="textBlockDate" Text="{Binding Replied}"  FontSize="14"/>
+                                <TextBlock x:Name="textBlockUser"  Text="{Binding User.Id}" FontSize="14"/>
+                                <TextBlock x:Name="textBlockQuestion" TextWrapping="Wrap" Text="{Binding Question.Text}"  FontSize="14"/>
+                                <TextBlock x:Name="textBlockText" TextWrapping="Wrap" Text="{Binding Answers.Text}" FontSize="14"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="5 0 15 5" VerticalAlignment="Bottom" >
+            <Button x:Name="buttonHome" Content="Home" Width="200" Margin="5" Click="buttonHome_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

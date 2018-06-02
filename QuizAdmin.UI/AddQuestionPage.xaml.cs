@@ -115,6 +115,7 @@ namespace QuizAdmin.UI
                     {
                         answerRepo.RemoveItem(answer);
                         answer.Text = null;
+                        answer.IsCorrect = false;
                     }
                     checkBoxes.Remove(cb);
                 }
