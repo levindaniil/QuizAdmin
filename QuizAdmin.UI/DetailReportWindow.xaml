@@ -15,8 +15,8 @@
         <Image Source="logo.png" VerticalAlignment="Top" Grid.Column="1" HorizontalAlignment="Right" Margin="20 0 0 10"/>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="60"></RowDefinition>
                 <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid>
@@ -27,6 +27,7 @@
                 <StackPanel Grid.Column="0" Margin="25 5 0 5">
                     <TextBlock Text=" User:" Height="25" HorizontalAlignment="Left" Foreground="White"/>
                     <TextBlock Text=" Date:" Height="25" HorizontalAlignment="Left" Foreground="White"/>
+                    <TextBlock Text="Question:" Height="25" HorizontalAlignment="Left" Foreground="White"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Margin="20 0 0 10">
                     <TextBlock x:Name="userTextBlock" Foreground="White" Height="25" HorizontalAlignment="Left"/>
@@ -34,7 +35,6 @@
                 </StackPanel>
             </Grid>
             <StackPanel Grid.Row="1" Margin="25 0 0 0">
-                <TextBlock Text="Question:" Height="25" HorizontalAlignment="Left" Foreground="White"/>
                 <TextBlock x:Name="questionTextBlock" TextWrapping='Wrap' Foreground="White"></TextBlock>
             </StackPanel>
             <StackPanel Grid.Row="2" Name="QuestionStackPanel"></StackPanel>
