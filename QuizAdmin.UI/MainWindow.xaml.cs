@@ -30,8 +30,11 @@ namespace QuizAdmin.UI
             InitializeComponent();
             PageFactory.Instance.PageRepository.HomePage.OpenQuestions += OpenQuestions;
             PageFactory.Instance.PageRepository.HomePage.AddQuestion += CreateNewQuestion;
+            PageFactory.Instance.PageRepository.HomePage.OpenStatistics += OpenStatistics;
             PageFactory.Instance.PageRepository.QuestionListPage.GoHome += GoHome;
             PageFactory.Instance.PageRepository.QuestionListPage.EditWindow += EditWindow;
+            PageFactory.Instance.PageRepository.QuestionListPage.OpenStatistics += OpenStatistics;
+            PageFactory.Instance.PageRepository.ReportListPage.GoHome += GoHome;
             mainFrame.NavigationService.Navigate(PageFactory.Instance.PageRepository.HomePage);
         }
 
@@ -60,7 +63,16 @@ namespace QuizAdmin.UI
             mainFrame.NavigationService.Navigate(AddQuestionPage);
         }
 
-        
+        private void OpenStatistics()
+        {
+            mainFrame.NavigationService.Navigate(PageFactory.Instance.PageRepository.ReportListPage);
+        }
+
+        private void ReportDetails(Report report)
+        {
+            var DetailReporWindow = new DetailReportWindow(report);
+        }
+
     }
 }
 //var question = new Question()

@@ -16,11 +16,10 @@
         </Grid.ColumnDefinitions>
         <Image Source="logo.png" Grid.Column="1" VerticalAlignment="Top" Margin="10" HorizontalAlignment="Right"/>
         <Grid  Margin="10">
-            <ListBox x:Name="listboxReports" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" SelectionChanged="listboxQuestions_SelectionChanged">
+            <ListBox x:Name="listboxReports" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalContentAlignment="Center">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-
                     </Style>
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
@@ -31,20 +30,20 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" MinHeight="20">
-                                <TextBlock Text="Date:    " FontWeight="Bold" FontSize="14"/>
-                                <TextBlock Text="User:    " FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="Date:    "  FontSize="14"/>
+                                <TextBlock Text="User:    " FontSize="14"/>
                                 <TextBlock Text="Question:" FontWeight="Bold" FontSize="14"/>
-                                <TextBlock Text="Answers: " FontWeight="Bold" FontSize="14"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" MinHeight="20">
                                 <TextBlock x:Name="textBlockDate" Text="{Binding Replied}"  FontSize="14"/>
-                                <TextBlock x:Name="textBlockUser"  Text="{Binding User.Id}" FontSize="14"/>
-                                <TextBlock x:Name="textBlockQuestion" TextWrapping="Wrap" Text="{Binding Question.Text}"  FontSize="14"/>
-                                <TextBlock x:Name="textBlockText" TextWrapping="Wrap" Text="{Binding Answers.Text}" FontSize="14"/>
+                                <TextBlock x:Name="User"  Text="{Binding User.Id}" FontSize="14"/>
+                                <TextBlock x:Name="textBlockQuestion" TextWrapping="Wrap" Text="{Binding Question.Text}" FontSize="14"/>
+                                <TextBlock x:Name="textBlockCorrect" Text="{Binding Correct}" FontSize="14"/>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+                
             </ListBox>
         </Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="5 0 15 5" VerticalAlignment="Bottom" >

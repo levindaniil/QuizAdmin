@@ -33,12 +33,11 @@ namespace QuizAdmin.Logic.Repository
 
         public override Answer EditItem(Answer item, object id)
         {
-            Answer answer;
             using (var context = new Context())
             {
                 if (!(String.IsNullOrEmpty(item.Text)))
                 {
-                    answer = context.Answers.FirstOrDefault(a => a.Id == (int)id);
+                    var answer = context.Answers.FirstOrDefault(a => a.Id == item.Id);
                     answer.IsCorrect = item.IsCorrect;
                     answer.Text = item.Text;
                     context.SaveChanges();

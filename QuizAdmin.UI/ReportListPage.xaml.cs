@@ -28,6 +28,12 @@ namespace QuizAdmin.UI
         public ReportListPage()
         {
             InitializeComponent();
+            foreach(var item in reportsRepo.Data)
+            {
+                if ((bool)item.IsOK) item.Correct = "Correct";
+                else item.Correct = "Uncorrect";
+            }
+
             listboxReports.ItemsSource = reportsRepo.Data.OrderByDescending(a => a.Replied);
             reportsRepo.ItemAdded += a => RefreshListBox();
         }
@@ -44,9 +50,9 @@ namespace QuizAdmin.UI
             GoHome?.Invoke();
         }
 
-        private void listboxQuestions_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        //private void lbi_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        //{
 
-        }
+        //}
     }
 }

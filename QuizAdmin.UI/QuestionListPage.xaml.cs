@@ -30,6 +30,7 @@ namespace QuizAdmin.UI
 
         public Action GoHome;
         public Action<Question> EditWindow;
+        public Action OpenStatistics;
 
         public QuestionListPage()
         {
@@ -98,6 +99,11 @@ namespace QuizAdmin.UI
                 EditWindow?.Invoke(chQ);
             }
             RefreshListBox();
+        }
+
+        private void buttonViewStats_Click(object sender, RoutedEventArgs e)
+        {
+            OpenStatistics?.Invoke();
         }
     }
 }

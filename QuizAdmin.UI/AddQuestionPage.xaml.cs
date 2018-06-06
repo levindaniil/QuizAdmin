@@ -92,7 +92,7 @@ namespace QuizAdmin.UI
                 question.Text = textBoxQuestionText.Text;
                 questionsRepo.EditItem(question, question.Id);
                 bool res = true;
-
+                var removeAnswers = new List<Answer>();
                 var checkBoxes = GetCheckBoxes();
                 foreach (var answer in question.Answers)
                 {
@@ -114,11 +114,14 @@ namespace QuizAdmin.UI
                     else
                     {
                         answerRepo.RemoveItem(answer);
-                        answer.Text = null;
-                        answer.IsCorrect = false;
+                        removeAnswers.Add(answer);
                     }
                     checkBoxes.Remove(cb);
                 }
+
+                if (removeAnswers.Count > 0)
+                    foreach (var answer in removeAnswers)
+                        question.Answers.Remove(answer);
 
                 if (checkBoxes.Count > 0)
                 {
@@ -133,6 +136,7 @@ namespace QuizAdmin.UI
                                 IsCorrect = (bool)cb.IsChecked
                             };
                             answerRepo.AddItem(newAnswer);
+                            question.Answers.Add(newAnswer);
                         }
                         else if (String.IsNullOrEmpty(tb.Text)&& (bool)cb.IsChecked)
                         {

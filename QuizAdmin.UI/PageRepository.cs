@@ -10,6 +10,7 @@ namespace QuizAdmin.UI
     {
         private HomePage _homePage;
         private QuestionListPage _questionListPage;
+        private ReportListPage _reportListPage;
 
         public HomePage HomePage
         {
@@ -19,6 +20,11 @@ namespace QuizAdmin.UI
         public QuestionListPage QuestionListPage
         {
             get { return _questionListPage ?? (_questionListPage = new QuestionListPage()); }
+        }
+
+        public ReportListPage ReportListPage
+        {
+            get { return _reportListPage ?? (_reportListPage = new ReportListPage()); }
         }
     }
 }

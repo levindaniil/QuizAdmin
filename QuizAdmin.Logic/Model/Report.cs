@@ -19,5 +19,7 @@ namespace QuizAdmin.Logic.Model
         public virtual Question Question { get; set; }
         public virtual List<Answer> Answers { get; set; }
         public DateTime? Replied { get; set; }
+        [NotMapped]
+        public string Correct { get; set; }
     }
 }

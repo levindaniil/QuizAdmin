@@ -36,7 +36,7 @@ namespace QuizAdmin.Logic.Repository
                 return (IRepository<T>)QuestionRepo ?? ((QuestionRepo = new QuestionRepository()) as IRepository<T>);
             else if (typeof(T) == typeof(User))
                 return (IRepository<T>)UserRepo ?? ((UserRepo = new UserRepository()) as IRepository<T>);
-            else if (typeof(T) == typeof(Question))
+            else if (typeof(T) == typeof(Report))
                 return (IRepository<T>)ReportRepo ?? ((ReportRepo = new ReportRepository()) as IRepository<T>);
             else
                 throw new Exception("No repository");
