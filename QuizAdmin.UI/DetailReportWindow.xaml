@@ -1,0 +1,43 @@
+﻿<Window x:Class="QuizAdmin.UI.DetailReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuizAdmin.UI"
+        mc:Ignorable="d"
+        Icon="logo.png"
+        Title="DetailReportWindow" Height="350" Width="600" Background="#FF003459">
+    <Grid Name="GridReportsDetails">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="230"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Image Source="logo.png" VerticalAlignment="Top" Grid.Column="1" HorizontalAlignment="Right" Margin="20 0 0 10"/>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="25 5 0 5">
+                    <TextBlock Text=" User:" Height="25" HorizontalAlignment="Left" Foreground="White"/>
+                    <TextBlock Text=" Date:" Height="25" HorizontalAlignment="Left" Foreground="White"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="20 0 0 10">
+                    <TextBlock x:Name="userTextBlock" Foreground="White" Height="25" HorizontalAlignment="Left"/>
+                    <TextBlock x:Name="dateTextBlock" Foreground="White" Height="25" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </Grid>
+            <StackPanel Grid.Row="1" Margin="25 0 0 0">
+                <TextBlock Text="Question:" Height="25" HorizontalAlignment="Left" Foreground="White"/>
+                <TextBlock x:Name="questionTextBlock" TextWrapping='Wrap' Foreground="White"></TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Name="QuestionStackPanel"></StackPanel>
+        </Grid>
+    </Grid>
+</Window>
