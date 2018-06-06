@@ -68,10 +68,10 @@ namespace QuizAdmin.UI
             mainFrame.NavigationService.Navigate(PageFactory.Instance.PageRepository.ReportListPage);
         }
 
-        private void ReportDetails(Report report)
-        {
-            var DetailReporWindow = new DetailReportWindow(report);
-        }
+        //private void ReportDetails(Report report)
+        //{
+        //    var DetailReporWindow = new DetailReportWindow(report);
+        //}
 
     }
 }
