@@ -64,9 +64,6 @@
     <Compile Include="AddQuestionPage.xaml.cs">
       <DependentUpon>AddQuestionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DetailReportWindow.xaml.cs">
-      <DependentUpon>DetailReportWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -79,10 +76,6 @@
       <DependentUpon>ReportListPage.xaml</DependentUpon>
     </Compile>
     <Page Include="AddQuestionPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DetailReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
