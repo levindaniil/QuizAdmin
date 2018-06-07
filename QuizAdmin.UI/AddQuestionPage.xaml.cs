@@ -39,16 +39,19 @@ namespace QuizAdmin.UI
         private void buttonAddQuestion_Click(object sender, RoutedEventArgs e)
         {
             if (question.Id == 0)
-            {
-                var newQuestion = new Question
+            { if (!String.IsNullOrEmpty(textBoxQuestionText.Text))
                 {
-                    Date = (DateTime)datePicker.SelectedDate,
-                    Text = textBoxQuestionText.Text,
-                    Explanation = textBoxExplanation.Text,
-                };
-
-                List<Answer> answers = new List<Answer>
-            {
+                    var newQuestion = new Question
+                    {
+                        Date = (DateTime)datePicker.SelectedDate,
+                        Text = textBoxQuestionText.Text,
+                        Explanation = textBoxExplanation.Text,
+                    };
+                    int textCount = 0;
+                    int checkCount = 0;
+                    int checkNull = 0;
+                    List<Answer> answers = new List<Answer>
+                {
                 new Answer
                 {
                     Text = textBox1.Text,
@@ -69,18 +72,33 @@ namespace QuizAdmin.UI
                     Text = textBox4.Text,
                     IsCorrect = (bool)checkBox4.IsChecked
                 }
-            };
-                foreach (var item in answers)
-                {
-                    if (!String.IsNullOrEmpty(item.Text))
-                        answerRepo.AddItem(item);
-                }
+                };
+                    foreach (var item in answers)
+                    {
+                        if (!String.IsNullOrEmpty(item.Text)) textCount++;
+                        if (item.IsCorrect) checkCount++;
+                        if (String.IsNullOrEmpty(item.Text) && item.IsCorrect) checkNull++;
+                    }
+                    if (textCount > 0)
+                        if (checkCount > 0)
+                            if (checkNull == 0)
+                            {
+                                foreach (var item in answers)
+                                {
+                                    if (!String.IsNullOrEmpty(item.Text))
+                                        answerRepo.AddItem(item);
+                                }
+                                newQuestion.Answers = answers;
+                                questionsRepo.AddItem(newQuestion);
 
-                newQuestion.Answers = answers;
-                questionsRepo.AddItem(newQuestion);
-                
-                MessageBox.Show("Your question was successefully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                GoHome?.Invoke();
+                                MessageBox.Show("Your question was successefully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                                GoHome?.Invoke();
+                            }
+                            else MessageBox.Show("You can't pick empty answer as a correct one", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        else { MessageBox.Show("You can't create question without choosing at least one correct answer", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
+                    else { MessageBox.Show("You can't create question without answers", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
+                }
+                else { MessageBox.Show("You can't create question without text", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
             }
 
             //редактирование вопроса и ответов к нему
@@ -90,66 +108,94 @@ namespace QuizAdmin.UI
                 question.Date = (DateTime)datePicker.SelectedDate;
                 question.Explanation = textBoxExplanation.Text;
                 question.Text = textBoxQuestionText.Text;
-                questionsRepo.EditItem(question, question.Id);
-                bool res = true;
-                var checkBoxes = GetCheckBoxes();
-                foreach (var answer in question.Answers)
+                //questionsRepo.EditItem(question, question.Id);
+                if (!String.IsNullOrEmpty(question.Text))
                 {
-                    CheckBox cb = checkBoxes.FirstOrDefault(c => chbAnswerDict[c.Name] == answer.Id);
-                    var tb = cb.Content as TextBox;
-                    if (!String.IsNullOrEmpty(tb.Text))
+                    bool res = true;
+                    var checkBoxes = GetCheckBoxes();
+                    int checkNull = 0;
+                    int textCount = 0;
+                    var removeAnswers = new List<Answer>();
+                    foreach (var answer in question.Answers)
                     {
-                        answer.Text = tb.Text;
-                        answer.IsCorrect = (bool)cb.IsChecked;
-                        answerRepo.EditItem(answer, answer.Id);
-                    }
-
-                    else if (String.IsNullOrEmpty(tb.Text) && (bool)cb.IsChecked)
-                    {
-                        MessageBox.Show("You can't pick empty answer as a correct one", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        res = false;
-                    }
-
-                    else
-                    {
-                        answerRepo.RemoveItem(answer);
-                        answer.Text = null;
-                        answer.IsCorrect = false;
-                    }
-                    checkBoxes.Remove(cb);
-                }
-
-                if (checkBoxes.Count > 0)
-                {
-                    foreach (var cb in checkBoxes)
-                    {
+                        CheckBox cb = checkBoxes.FirstOrDefault(c => chbAnswerDict[c.Name] == answer.Id);
                         var tb = cb.Content as TextBox;
                         if (!String.IsNullOrEmpty(tb.Text))
                         {
-                            Answer newAnswer = new Answer
-                            {
-                                Text = tb.Text,
-                                IsCorrect = (bool)cb.IsChecked
-                            };
-                            answerRepo.AddItem(newAnswer);
-                            question.Answers.Add(newAnswer);
+                            textCount++;
+                            answer.Text = tb.Text;
+                            answer.IsCorrect = (bool)cb.IsChecked;
+                            if ((bool)cb.IsChecked) checkNull++;
+                            answerRepo.EditItem(answer, answer.Id);
                         }
-                        else if (String.IsNullOrEmpty(tb.Text)&& (bool)cb.IsChecked)
+
+                        else if ((bool)cb.IsChecked)
                         {
                             MessageBox.Show("You can't pick empty answer as a correct one", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             res = false;
                         }
-                            
+                        else
+                        {
+                            removeAnswers.Add(answer);
+                            answerRepo.RemoveItem(answer);
+                        }
+                        checkBoxes.Remove(cb);
                     }
-                }
+                    foreach (var item in removeAnswers) question.Answers.Remove(item);
 
-                if (res)
-                {
-                    MessageBox.Show("Your question was successefully edited", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    GoHome?.Invoke();
+
+                    if (checkBoxes.Count > 0)
+                    {
+                        foreach (var cb in checkBoxes)
+                        {
+                            var tb = cb.Content as TextBox;
+                            if (!String.IsNullOrEmpty(tb.Text)) textCount++;
+                            if ((bool)cb.IsChecked) checkNull++;
+                        }
+                        if (textCount > 0)
+                        {
+                            if (checkNull > 0)
+                            {
+                                foreach (var cb in checkBoxes)
+                                {
+                                    var tb = cb.Content as TextBox;
+                                    if (!String.IsNullOrEmpty(tb.Text))
+                                    {
+                                        Answer newAnswer = new Answer
+                                        {
+                                            Text = tb.Text,
+                                            IsCorrect = (bool)cb.IsChecked
+                                        };
+                                        answerRepo.AddItem(newAnswer);
+                                        question.Answers.Add(newAnswer);
+                                    }
+                                    else if ((bool)cb.IsChecked)
+                                    {
+                                        MessageBox.Show("You can't pick empty answer as a correct one", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                        res = false;
+                                    }
+                                    else
+                                    {
+                                        questionsRepo.RemoveItem(question);
+                                        questionsRepo.AddItem(question);
+                                    }
+                                }
+                                if (res)
+                                {
+                                    MessageBox.Show("Your question was successefully edited", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    GoHome?.Invoke();
+                                }
+                            }
+                            else { MessageBox.Show("You can't create question without choosing at least one correct answer", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
+                        }
+                        else { MessageBox.Show("You can't create question without answers", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
+                    }
+                    else if (textCount == 0) { MessageBox.Show("You can't create question without answers", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
+
                 }
+                else { MessageBox.Show("You can't create question without text", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
+
             }
-            
         }
 
         public Action GoHome;
