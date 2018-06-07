@@ -72,23 +72,25 @@ namespace QuizAdmin.UI
                     Text = textBox4.Text,
                     IsCorrect = (bool)checkBox4.IsChecked
                 }
-                };
+                    };
                     foreach (var item in answers)
                     {
                         if (!String.IsNullOrEmpty(item.Text)) textCount++;
                         if (item.IsCorrect) checkCount++;
                         if (String.IsNullOrEmpty(item.Text) && item.IsCorrect) checkNull++;
                     }
+
                     if (textCount > 0)
                         if (checkCount > 0)
                             if (checkNull == 0)
                             {
+                                var questionAnswers = new List<Answer>();
                                 foreach (var item in answers)
                                 {
                                     if (!String.IsNullOrEmpty(item.Text))
-                                        answerRepo.AddItem(item);
+                                        questionAnswers.Add(item);
                                 }
-                                newQuestion.Answers = answers;
+                                newQuestion.Answers = questionAnswers;
                                 questionsRepo.AddItem(newQuestion);
 
                                 MessageBox.Show("Your question was successefully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
