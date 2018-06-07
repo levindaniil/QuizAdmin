@@ -23,12 +23,11 @@ namespace QuizAdmin.Logic.Repository
             {
                 context.Set<Answer>().Add(answer);
                 context.SaveChanges();
+                _items.Add(answer);
+                ItemAdded?.Invoke(answer);
+                return answer;
             }
 
-            _items.Add(answer);
-            ItemAdded?.Invoke(answer);
-
-            return answer;
         }
 
         public override Answer EditItem(Answer item, object id)
@@ -37,9 +36,10 @@ namespace QuizAdmin.Logic.Repository
             {
                 if (!(String.IsNullOrEmpty(item.Text)))
                 {
-                    var answer = context.Answers.FirstOrDefault(a => a.Id == item.Id);
+                    var answer = context.Answers.FirstOrDefault(a => a.Id == item.Id) as Answer;
                     answer.IsCorrect = item.IsCorrect;
                     answer.Text = item.Text;
+
                     context.SaveChanges();
                     return answer;
                 }

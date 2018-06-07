@@ -26,7 +26,7 @@
                     <DataTemplate DataType="x:type logic=Model.Report">
                         <Grid x:Name="listBoxItemTemplate" HorizontalAlignment="Stretch" >
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="80"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" MinHeight="20">

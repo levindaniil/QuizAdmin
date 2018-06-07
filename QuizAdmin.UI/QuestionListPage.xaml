@@ -20,15 +20,14 @@
         <ListBox x:Name="listboxQuestions" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" SelectionChanged="listboxQuestions_SelectionChanged">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                    
-                </Style>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                    </Style>
             </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate DataType="x:type logic=Model.Question">
                     <Grid x:Name="listBoxItemTemplate" HorizontalAlignment="Stretch" >
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="80"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" MinHeight="20">

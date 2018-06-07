@@ -30,6 +30,7 @@
                     <TextBlock Text="Question:" Height="25" HorizontalAlignment="Left" Foreground="White"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Margin="20 0 0 10">
+                    <Grid Name="dataGrid"></Grid>
                     <TextBlock x:Name="userTextBlock" Foreground="White" Height="25" HorizontalAlignment="Left"/>
                     <TextBlock x:Name="dateTextBlock" Foreground="White" Height="25" HorizontalAlignment="Left"/>
                 </StackPanel>
