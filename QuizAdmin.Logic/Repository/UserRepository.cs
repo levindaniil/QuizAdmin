@@ -13,6 +13,7 @@ namespace QuizAdmin.Logic.Repository
         {
             using (var context = new Context())
             {
+                context.Database.Connection.Open();
                 _items = context.Users.ToList();
             }
         }

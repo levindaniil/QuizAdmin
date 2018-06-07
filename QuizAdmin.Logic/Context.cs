@@ -16,7 +16,7 @@ namespace QuizAdmin.Logic
         public DbSet<Report> Reports { get; set; }
         public DbSet<User> Users { get; set; }
 
-        public Context() : base("QuizToolDB")
+        public Context() : base("QuizAdminDB")
         {
             
         }
