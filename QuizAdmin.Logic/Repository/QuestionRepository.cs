@@ -34,15 +34,16 @@ namespace QuizAdmin.Logic.Repository
         {
             using (var context = new Context())
             {
-                //var questionToEdit = context.Questions.Include("Answers").FirstOrDefault(q => q.Id == (int)id);
-                ////context.Set<Question>().Remove(questionToEdit);
-                ////context.SaveChanges();
-                ////context.Set<Question>().Add(question);
-                //questionToEdit.Date = question.Date;
-                //questionToEdit.Explanation = question.Explanation;
-                //questionToEdit.Text = question.Text;
-                //ItemAdded?.Invoke(question);
+                var questionToEdit = context.Questions.Include("Answers").FirstOrDefault(q => q.Id == (int)id);
+                //context.Set<Question>().Remove(questionToEdit);
                 //context.SaveChanges();
+                //context.Set<Question>().Add(question);
+                questionToEdit.Date = question.Date;
+                questionToEdit.Explanation = question.Explanation;
+                questionToEdit.Text = question.Text;
+                questionToEdit.Answers = question.Answers;
+                ItemAdded?.Invoke(question);
+                context.SaveChanges();
                 return question;
             }
         }
