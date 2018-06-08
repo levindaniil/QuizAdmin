@@ -40,11 +40,15 @@ namespace QuizAdmin.UI
         private void buttonAddQuestion_Click(object sender, RoutedEventArgs e)
         {
             if (question.Id == 0)
-            { if (!String.IsNullOrEmpty(textBoxQuestionText.Text))
+            {
+                List<Answer> newAnswers = new List<Answer>();
+
+                if (!String.IsNullOrEmpty(textBoxQuestionText.Text))
                 {
+                    var newDate = (DateTime)datePicker.SelectedDate;
                     var newQuestion = new Question
                     {
-                        Date = (DateTime)datePicker.SelectedDate,
+                        Date = newDate.Date,
                         Text = textBoxQuestionText.Text,
                         Explanation = textBoxExplanation.Text,
                     };
@@ -88,11 +92,12 @@ namespace QuizAdmin.UI
                                 {
                                     if (!String.IsNullOrEmpty(item.Text))
                                     {
-                                        answerRepo.AddItem(item);
+                                        newAnswers.Add(item);
                                     }
                                         
                                 }
-                                questionsRepo.AddItem(question);
+                                newQuestion.Answers = newAnswers;
+                                questionsRepo.AddItem(newQuestion);
 
                                 MessageBox.Show("Your question was successefully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                                 GoHome?.Invoke();

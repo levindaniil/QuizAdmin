@@ -21,7 +21,7 @@ namespace QuizAdmin.Logic.Repository
         {
             using (var context = new Context())
             {
-                context.Set<Question>().Add(question);
+                context.Questions.Add(question);
                 context.SaveChanges();
             }
 
