@@ -26,15 +26,15 @@ namespace QuizAdmin.UI
         IRepository<Question> questionsRepo = RepositoryFactory.Default.GetRepository<Question>() as QuestionRepository;
         IRepository<Answer> answerRepo = RepositoryFactory.Default.GetRepository<Answer>() as AnswerRepository;
         Dictionary<string, int> chbAnswerDict;
-        
+
         Question question;
-        
+
 
         public AddQuestionPage(Question _question)
         {
             InitializeComponent();
             question = _question;
-            chbAnswerDict = new Dictionary<string, int>(); 
+            chbAnswerDict = new Dictionary<string, int>();
         }
 
         private void buttonAddQuestion_Click(object sender, RoutedEventArgs e)
@@ -94,7 +94,7 @@ namespace QuizAdmin.UI
                                     {
                                         newAnswers.Add(item);
                                     }
-                                        
+
                                 }
                                 newQuestion.Answers = newAnswers;
                                 questionsRepo.AddItem(newQuestion);
@@ -118,7 +118,6 @@ namespace QuizAdmin.UI
                 question.Date = (DateTime)datePicker.SelectedDate;
                 question.Explanation = textBoxExplanation.Text;
                 question.Text = textBoxQuestionText.Text;
-                //questionsRepo.EditItem(question, question.Id);
                 if (!String.IsNullOrEmpty(question.Text))
                 {
                     bool res = true;
@@ -151,6 +150,8 @@ namespace QuizAdmin.UI
                         }
                         checkBoxes.Remove(cb);
                     }
+
+                    questionsRepo.EditItem(question, question.Id);
                     foreach (var item in removeAnswers) question.Answers.Remove(item);
 
 
@@ -196,14 +197,20 @@ namespace QuizAdmin.UI
                                     GoHome?.Invoke();
                                 }
                             }
-                            else { MessageBox.Show("You can't create question without choosing at least one correct answer", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
+                            else
+                                MessageBox.Show("You can't create question without choosing at least one correct answer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-                        else { MessageBox.Show("You can't create question without answers", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
+                        else
+                            MessageBox.Show("You can't create question without answers", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    else if (textCount == 0) { MessageBox.Show("You can't create question without answers", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
-
+                    else if (textCount == 0)
+                        MessageBox.Show("You can't create question without answers", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                else { MessageBox.Show("You can't create question without text", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
+                else
+                    MessageBox.Show("You can't create question without text", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                MessageBox.Show("Your question was successefully edited", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                GoHome?.Invoke();
 
             }
         }
