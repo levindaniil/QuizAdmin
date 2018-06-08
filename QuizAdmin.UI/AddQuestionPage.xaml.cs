@@ -92,7 +92,7 @@ namespace QuizAdmin.UI
                                     }
                                         
                                 }
-                                questionsRepo.ItemAdded(question);
+                                questionsRepo.AddItem(question);
 
                                 MessageBox.Show("Your question was successefully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                                 GoHome?.Invoke();
