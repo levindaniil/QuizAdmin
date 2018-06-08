@@ -41,10 +41,5 @@ namespace QuizAdmin.Logic.Repository
             else
                 throw new Exception("No repository");
         }
-
-
-
-
-
     }
 }

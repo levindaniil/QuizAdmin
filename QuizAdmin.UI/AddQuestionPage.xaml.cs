@@ -28,6 +28,7 @@ namespace QuizAdmin.UI
         Dictionary<string, int> chbAnswerDict;
         
         Question question;
+        
 
         public AddQuestionPage(Question _question)
         {
@@ -86,7 +87,10 @@ namespace QuizAdmin.UI
                                 foreach (var item in answers)
                                 {
                                     if (!String.IsNullOrEmpty(item.Text))
+                                    {
                                         answerRepo.AddItem(item);
+                                    }
+                                        
                                 }
                                 newQuestion.Answers = answers;
                                 questionsRepo.AddItem(newQuestion);
@@ -105,6 +109,8 @@ namespace QuizAdmin.UI
 
             else
             {
+                List<Answer> answers = new List<Answer>();
+
                 question.Date = (DateTime)datePicker.SelectedDate;
                 question.Explanation = textBoxExplanation.Text;
                 question.Text = textBoxQuestionText.Text;

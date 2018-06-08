@@ -93,10 +93,12 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\UserRequestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AnswerResource.cs" />
+    <Compile Include="Models\CompleteReportRequest.cs" />
     <Compile Include="Models\ReportRequest.cs" />
     <Compile Include="Models\ReportResource.cs" />
     <Compile Include="Models\QuestionResource.cs" />

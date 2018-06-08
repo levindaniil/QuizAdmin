@@ -9,10 +9,24 @@ namespace QuizAdmin.Logic.Repository
 {
     public class ReportRepository : Repository<Report>
     {
+        public ReportRepository()
+        {
+            using (var context = new Context())
+            {
+                _items = context.Reports.Include("Question").Include("User").Include("Question.Answers").Include("Answers").ToList();
+            }
+        }
+
         public override Report AddItem(Report item)
         {
             using (var context = new Context())
             {
+                var currentUser = context.Users.FirstOrDefault(u => u.Id == item.User.Id);
+                if (currentUser != null) item.User = currentUser;
+
+                var currentQuestion = context.Questions.FirstOrDefault(q => q.Id == item.Question.Id);
+                item.Question = currentQuestion;
+
                 context.Set<Report>().Add(item);
                 context.SaveChanges();
             }

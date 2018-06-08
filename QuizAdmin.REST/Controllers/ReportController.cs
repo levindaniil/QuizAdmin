@@ -17,6 +17,9 @@ namespace QuizAdmin.REST.Controllers
         [HttpPost]
         public HttpResponseMessage PutReport([FromBody] ReportRequest request)
         {
+            DateTime requestDate;
+            DateTime.TryParse(request.Date, out requestDate);
+
             if (request == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, new HttpError("Wrong content"));
@@ -26,11 +29,12 @@ namespace QuizAdmin.REST.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, new HttpError("Cannot identify user"));
             }
-            Question question = GetQuestion(request.Date);
+            Question question = GetQuestion(requestDate);
             if (question == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, new HttpError("Cannot find question for the date"));
             }
+
             IRepository<Report> reportList = RepositoryFactory.Default.GetRepository<Report>() as ReportRepository;
             Report report = reportList.AddItem(new Report
             {
@@ -38,8 +42,10 @@ namespace QuizAdmin.REST.Controllers
                 Question = question,
                 Created = DateTime.Now
             });
+
             List<AnswerResource> answers = new List<AnswerResource>();
-            foreach (var answer in report.Question.Answers)
+            IRepository<Question> questionList = RepositoryFactory.Default.GetRepository<Question>() as QuestionRepository;
+            foreach (var answer in questionList.Data.FirstOrDefault(q => q.Id == q.Id).Answers)
             {
                 answers.Add(new AnswerResource
                 {

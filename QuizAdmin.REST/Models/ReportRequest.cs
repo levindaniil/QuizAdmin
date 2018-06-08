@@ -11,6 +11,11 @@ namespace QuizAdmin.REST.Models
         [JsonProperty("user")]
         public string User { get; set; }
         [JsonProperty("date")]
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
+
+        public ReportRequest()
+        {
+            
+        }
     }
 }

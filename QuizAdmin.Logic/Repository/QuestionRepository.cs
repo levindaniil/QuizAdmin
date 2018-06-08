@@ -35,13 +35,37 @@ namespace QuizAdmin.Logic.Repository
             using (var context = new Context())
             {
                 var questionToEdit = context.Questions.Include("Answers").FirstOrDefault(q => q.Id == (int)id);
-                //context.Set<Question>().Remove(questionToEdit);
-                //context.SaveChanges();
-                //context.Set<Question>().Add(question);
+                
+               
                 questionToEdit.Date = question.Date;
                 questionToEdit.Explanation = question.Explanation;
                 questionToEdit.Text = question.Text;
-                questionToEdit.Answers = question.Answers;
+
+                var oldAnswers = questionToEdit.Answers;
+                var newAnswers = question.Answers;
+
+                var ansQuan = oldAnswers.Count();
+
+                for (int i = 0; i < ansQuan; i++)                
+                {
+                    var temp = newAnswers.FirstOrDefault(a => a.Id == oldAnswers[i].Id);
+                    if (temp == null)
+                        oldAnswers.Remove(oldAnswers[i]);
+                    else
+                    {
+                        oldAnswers[i].IsCorrect = temp.IsCorrect;
+                        oldAnswers[i].Text = temp.Text;
+                        newAnswers.Remove(temp);
+                    }
+                }
+
+                var ansLeft = newAnswers.Count();
+                if (ansLeft > 0)
+                    foreach (var a in newAnswers)
+                    {
+                        oldAnswers.Add(a);
+                    }                                    
+
                 ItemAdded?.Invoke(question);
                 context.SaveChanges();
                 return question;

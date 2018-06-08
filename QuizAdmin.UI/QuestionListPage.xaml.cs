@@ -76,7 +76,15 @@ namespace QuizAdmin.UI
         {
             if (listboxQuestions.SelectedIndex != -1)
             {
-                buttonEditQuestion.IsEnabled = true;
+                Question selectedQuestion = listboxQuestions.SelectedItem as Question;
+                IRepository<Report> reports = RepositoryFactory.Default.GetRepository<Report>() as ReportRepository;
+                if (reports.Data.FirstOrDefault(r => r.Question.Id == selectedQuestion.Id) != null)
+                {
+                    buttonEditQuestion.IsEnabled = false;
+                    buttonEditQuestion.ToolTip = "You can't edit the question because a report for it is already created";
+                }
+                else
+                    buttonEditQuestion.IsEnabled = true;
                 buttonDeleteQuestion.IsEnabled = true;
                 buttonViewStats.IsEnabled = true;
             }
