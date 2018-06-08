@@ -81,10 +81,16 @@ namespace QuizAdmin.UI
                 if (reports.Data.FirstOrDefault(r => r.Question.Id == selectedQuestion.Id) != null)
                 {
                     buttonEditQuestion.IsEnabled = false;
-                    buttonEditQuestion.ToolTip = "You can't edit the question because a report for it is already created";
+                    ToolTip tp = new ToolTip();
+                    tp.Content = "You can't edit the question because a report for it is already created"; ;
+                    buttonEditQuestion.ToolTip = tp;
                 }
                 else
+                {
+                    buttonEditQuestion.ToolTip = null;
                     buttonEditQuestion.IsEnabled = true;
+                }
+                    
                 buttonDeleteQuestion.IsEnabled = true;
                 buttonViewStats.IsEnabled = true;
             }

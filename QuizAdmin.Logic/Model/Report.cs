@@ -20,6 +20,17 @@ namespace QuizAdmin.Logic.Model
         public virtual List<Answer> Answers { get; set; }
         public DateTime? Replied { get; set; }
         [NotMapped]
-        public string Correct { get; set; }
+        public string Correct
+        {
+            get
+            {
+                if (IsOK == true)
+                    return "Correct";
+                else if (IsOK == false)
+                    return "Incorrect";
+                else
+                    return "Unknown";
+            }
+        }
     }
 }

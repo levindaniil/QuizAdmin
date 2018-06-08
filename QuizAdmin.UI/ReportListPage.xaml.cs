@@ -28,12 +28,7 @@ namespace QuizAdmin.UI
         public ReportListPage()
         {
             InitializeComponent();
-            foreach(var item in reportsRepo.Data)
-            {
-                if ((bool)item.IsOK) item.Correct = "Correct";
-                else item.Correct = "Uncorrect";
-            }
-
+            
             listboxReports.ItemsSource = reportsRepo.Data.OrderByDescending(a => a.Replied);
             reportsRepo.ItemAdded += a => RefreshListBox();
         }
