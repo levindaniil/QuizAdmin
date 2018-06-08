@@ -35,7 +35,7 @@
                                 <TextBlock Text="Question: " FontWeight="Bold" FontSize="14"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" MinHeight="20">
-                                <TextBlock x:Name="textBlockDate" Text="{Binding ShortDate}"  FontSize="14"/>
+                                <TextBlock x:Name="textBlockDate" Text="{Binding Date}"  FontSize="14"/>
                                 <TextBlock x:Name="textBlockText" TextWrapping="Wrap" Text="{Binding Text}" FontSize="14"/>
                             </StackPanel>
                         </Grid>
@@ -44,7 +44,7 @@
         </ListBox>
         </Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="5 0 15 5" VerticalAlignment="Bottom" >
-            <Button x:Name="buttonViewStats" IsEnabled="False" Content="View statistics" Width="200" Margin="5" Click="buttonViewStats_Click"/>
+            <Button x:Name="buttonViewStats"  Content="View statistics" Width="200" Margin="5" Click="buttonViewStats_Click"/>
             <Button x:Name="buttonEditQuestion" IsEnabled="False" Content="Edit question" Width="200" Margin="5" Click="buttonEditQuestion_Click"/>
             <Button x:Name="buttonDeleteQuestion" IsEnabled="False" Content="Delete question" Width="200" Margin="5" Click="buttonDeleteQuestion_Click"/>
             <Button x:Name="buttonHome" Content="Home" Width="200" Margin="5" Click="buttonHome_Click"/>
