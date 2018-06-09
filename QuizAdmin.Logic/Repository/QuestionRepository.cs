@@ -64,11 +64,12 @@ namespace QuizAdmin.Logic.Repository
                     foreach (var a in newAnswers)
                     {
                         oldAnswers.Add(a);
-                    }                                    
+                    }
 
-                ItemAdded?.Invoke(question);
                 context.SaveChanges();
-                return question;
+                ItemAdded?.Invoke(questionToEdit);
+
+                return questionToEdit;
             }
         }
 
