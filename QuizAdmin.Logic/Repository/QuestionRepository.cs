@@ -65,7 +65,8 @@ namespace QuizAdmin.Logic.Repository
                     {
                         oldAnswers.Add(a);
                     }
-
+                question.Answers = oldAnswers;
+                questionToEdit.Answers = oldAnswers;
                 context.SaveChanges();
                 ItemAdded?.Invoke(questionToEdit);
 
