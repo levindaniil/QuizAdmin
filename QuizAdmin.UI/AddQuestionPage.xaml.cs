@@ -223,7 +223,11 @@ namespace QuizAdmin.UI
                             {
                                 if (res)
                                 {
-                                    foreach (var item in removeAnswers) question.Answers.Remove(item);
+                                    foreach (var item in removeAnswers)
+                                    {
+                                        question.Answers.Remove(item);
+                                        answerRepo.RemoveItem(item);
+                                    }
                                     questionsRepo.EditItem(question, question.Id);
                                     MessageBox.Show("Your question was successefully edited", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                                     GoHome?.Invoke();
