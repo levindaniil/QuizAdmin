@@ -1,4 +1,5 @@
-﻿using QuizAdmin.Logic.Model;
+﻿using Newtonsoft.Json;
+using QuizAdmin.Logic.Model;
 using QuizAdmin.Logic.Repository;
 using QuizAdmin.REST.Models;
 using System;
@@ -33,12 +34,16 @@ namespace QuizAdmin.REST.Controllers
             if (request == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, new HttpError("Wrong content"));
-            }
+            }           
 
             Report report = GetReport(created, report_Guid);
             if (report == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, new HttpError("Cannot find report for the date"));
+            }
+            else if (report.IsOK != null)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.Conflict, new HttpError("Requested report is already completed"));
             }
 
             Report userReport = new Report()
@@ -55,8 +60,8 @@ namespace QuizAdmin.REST.Controllers
             reportRepo.EditItem(userReport, report_Guid);
 
 
-
-            var jsonResponse = "Priffke kak deliffke";
+            
+            var jsonResponse = JsonConvert.SerializeObject(report_Guid);
             var response = Request.CreateResponse(HttpStatusCode.OK);
             response.Content = new StringContent(jsonResponse.ToString(), Encoding.UTF8, "application/json");
             return response;
@@ -64,7 +69,7 @@ namespace QuizAdmin.REST.Controllers
 
         private Report GetReport(DateTime created, Guid report_guid)
         {            
-            IEnumerable<Report> candidateReports = reportRepo.FindAll(r => (DateTime)r.Created == (DateTime)created && r.Id == report_guid);
+            IEnumerable<Report> candidateReports = reportRepo.FindAll(r => ((r.Created.Subtract(created)).TotalSeconds < 1)&& r.Id == report_guid);
             if (candidateReports.Count() != 1)
             {
                 return null;

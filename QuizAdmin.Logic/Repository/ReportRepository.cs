@@ -57,6 +57,8 @@ namespace QuizAdmin.Logic.Repository
                 
                 context.SaveChanges();
             }
+            _items.Remove(_items.FirstOrDefault(r => r.Id == report.Id));
+            _items.Add(report);
             return report;
         }
     }

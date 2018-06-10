@@ -45,7 +45,7 @@ namespace QuizAdmin.REST.Controllers
 
             List<AnswerResource> answers = new List<AnswerResource>();
             IRepository<Question> questionList = RepositoryFactory.Default.GetRepository<Question>() as QuestionRepository;
-            foreach (var answer in questionList.Data.FirstOrDefault(q => q.Id == q.Id).Answers)
+            foreach (var answer in questionList.Data.FirstOrDefault(q => q.Id == question.Id).Answers)
             {
                 answers.Add(new AnswerResource
                 {
