@@ -46,7 +46,7 @@ namespace QuizAdmin.Logic.Repository
 
                 var ansQuan = oldAnswers.Count();
 
-                for (int i = 0; i < ansQuan; i++)                
+                for (int i = ansQuan-1; i >= 0; i--)                
                 {
                     var temp = newAnswers.FirstOrDefault(a => a.Id == oldAnswers[i].Id);
                     if (temp == null)
