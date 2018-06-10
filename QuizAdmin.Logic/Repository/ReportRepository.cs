@@ -43,6 +43,17 @@ namespace QuizAdmin.Logic.Repository
             using (var context = new Context())
             {
                 report = context.Reports.FirstOrDefault(a => a.Id == (Guid)id);
+                report.IsOK = item.IsOK;
+
+                List<Answer> userAnswers = new List<Answer>();
+                foreach (var a in item.Answers)
+                {
+                    var ans = context.Answers.FirstOrDefault(x => x.Id == a.Id);
+                    userAnswers.Add(ans);
+                }
+
+                report.Answers = userAnswers;
+                report.Replied = item.Replied;
                 
                 context.SaveChanges();
             }

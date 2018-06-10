@@ -13,9 +13,11 @@ namespace QuizAdmin.REST.Controllers
 {
     public class UserRequestController : ApiController
     {
+        IRepository<Report> reportRepo = RepositoryFactory.Default.GetRepository<Report>() as ReportRepository;
+
         [HttpPost]
         public HttpResponseMessage GetReport([FromBody] CompleteReportRequest request)
-        {
+        {            
             DateTime.TryParse(request.Created, out DateTime created);
             DateTime.TryParse(request.Finished, out DateTime finished);
             Guid.TryParse(request.Report_Guid, out Guid report_Guid);
@@ -26,6 +28,7 @@ namespace QuizAdmin.REST.Controllers
                 if (int.TryParse(a, out int i))
                     answers_Id.Add(i);
             }
+            var userAnswers = GetAnswers(answers_Id); 
 
             if (request == null)
             {
@@ -38,6 +41,19 @@ namespace QuizAdmin.REST.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, new HttpError("Cannot find report for the date"));
             }
 
+            Report userReport = new Report()
+            {
+                Id = report_Guid,
+                Created = created,
+                Replied = finished,
+                IsOK = isOK,
+                User = report.User,
+                Question = report.Question,
+                Answers = userAnswers
+            };
+
+            reportRepo.EditItem(userReport, report_Guid);
+
 
 
             var jsonResponse = "Priffke kak deliffke";
@@ -47,9 +63,8 @@ namespace QuizAdmin.REST.Controllers
         }
 
         private Report GetReport(DateTime created, Guid report_guid)
-        {
-            IRepository<Report> reportList = RepositoryFactory.Default.GetRepository<Report>() as ReportRepository;
-            IEnumerable<Report> candidateReports = reportList.FindAll(r => r.Created == created && r.Id == report_guid);
+        {            
+            IEnumerable<Report> candidateReports = reportRepo.FindAll(r => (DateTime)r.Created == (DateTime)created && r.Id == report_guid);
             if (candidateReports.Count() != 1)
             {
                 return null;
@@ -57,5 +72,16 @@ namespace QuizAdmin.REST.Controllers
             return candidateReports.First();            
         }
 
+        private List<Answer> GetAnswers(List<int> answers_Id)
+        {
+            List<Answer> list = new List<Answer>();
+            IRepository<Answer> answerRepo = RepositoryFactory.Default.GetRepository<Answer>() as AnswerRepository;
+            foreach (var id in answers_Id)
+            {
+                var a = answerRepo.Data.FirstOrDefault(x => x.Id == id);
+                list.Add(a);
+            }
+            return list;
+        }
     }
 }
