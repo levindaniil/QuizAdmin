@@ -78,6 +78,9 @@
     <Compile Include="ReportListPage.xaml.cs">
       <DependentUpon>ReportListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserReportPage.xaml.cs">
+      <DependentUpon>UserReportPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddQuestionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -103,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ReportListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserReportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

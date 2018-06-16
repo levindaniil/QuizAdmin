@@ -18,54 +18,49 @@ using System.Windows.Shapes;
 namespace QuizAdmin.UI
 {
     /// <summary>
-    /// Логика взаимодействия для ReportListPage.xaml
+    /// Логика взаимодействия для UserReportPage.xaml
     /// </summary>
-    public partial class ReportListPage : Page
+    /// 
+
+
+    public partial class UserReportPage : Page
     {
         IRepository<Report> reportsRepo = RepositoryFactory.Default.GetRepository<Report>() as ReportRepository;
         public Action GoHome;
 
-        public ReportListPage()
+        public UserReportPage()
         {
             InitializeComponent();
-            
-            listboxReports.ItemsSource = reportsRepo.Data.OrderByDescending(a => a.Replied);
+            listboxUserReports.ItemsSource = reportsRepo.Data.OrderByDescending(a => a.Replied);
             reportsRepo.ItemAdded += a => RefreshListBox();
         }
 
         private void RefreshListBox()
         {
-            listboxReports.ItemsSource = null;
-            listboxReports.ItemsSource = reportsRepo.Data.OrderByDescending(a => a.Replied);
+            listboxUserReports.ItemsSource = null;
+            listboxUserReports.ItemsSource = reportsRepo.Data;
         }
 
         private void buttonHome_Click(object sender, RoutedEventArgs e)
         {
-            listboxReports.SelectedIndex = -1;
+            listboxUserReports.SelectedIndex = -1;
             GoHome?.Invoke();
         }
 
-
-        // Sorting, logic template.
         private void buttonOrder_Click(object sender, RoutedEventArgs e)
         {
             if (comboboxOrderType.SelectedItem != null)
             {
                 if (comboboxOrderType.SelectedItem.ToString() == "Ascending")
                 {
-                    listboxReports.ItemsSource = reportsRepo.Data.OrderBy(r =>r.Replied);
+                    listboxUserReports.ItemsSource = reportsRepo.Data.OrderBy(r => r.User.Key);
                 }
+
                 else
-                    listboxReports.ItemsSource = reportsRepo.Data.OrderByDescending(r => r.Replied);
+                    listboxUserReports.ItemsSource = reportsRepo.Data.OrderByDescending(r => r.User.Key);
             }
             else
                 MessageBox.Show("Please, choose order parameter!");
         }
     }
-
-        //private void lbi_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
-
-        //}
- }
-
+}
