@@ -91,15 +91,13 @@ namespace QuizAdmin.UI
                     buttonEditQuestion.IsEnabled = true;
                 }
                     
-                buttonDeleteQuestion.IsEnabled = true;
-                buttonViewStats.IsEnabled = true;
+                buttonDeleteQuestion.IsEnabled = true;               
             }
 
             if(listboxQuestions.SelectedIndex == -1)
             {
                 buttonEditQuestion.IsEnabled = false;
                 buttonDeleteQuestion.IsEnabled = false;
-                buttonViewStats.IsEnabled = false;
             }
         }
 
@@ -115,9 +113,9 @@ namespace QuizAdmin.UI
             RefreshListBox();
         }
 
-        private void buttonViewStats_Click(object sender, RoutedEventArgs e)
+        /*private void buttonViewStats_Click(object sender, RoutedEventArgs e)
         {
             OpenStatistics?.Invoke();
-        }
+        }*/
     }
 }
