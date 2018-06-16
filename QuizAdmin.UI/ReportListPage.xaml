@@ -49,5 +49,12 @@
         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="5 0 15 5" VerticalAlignment="Bottom" >
             <Button x:Name="buttonHome" Content="Home" Width="200" Margin="5" Click="buttonHome_Click"/>
         </StackPanel>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,15,147.6" VerticalAlignment="Bottom" >
+            <Button x:Name="buttonOrder" Content="Order by" Width="200" Margin="5" Click="buttonOrder_Click"/>
+            <ComboBox x:Name="comboboxOrderType" FontSize="14" HorizontalContentAlignment="Center" Margin="5 0 5 0">
+                <ComboBoxItem Content="Ascending"/>
+                <ComboBoxItem Content="Descending"/>
+            </ComboBox>
+        </StackPanel>
     </Grid>
 </Page>

@@ -45,9 +45,25 @@ namespace QuizAdmin.UI
             GoHome?.Invoke();
         }
 
+
+        // Sorting, logic template.
+        private void buttonOrder_Click(object sender, RoutedEventArgs e)
+        {
+            if (comboboxOrderType.SelectedItem != null)
+            {
+                if (comboboxOrderType.SelectedItem.ToString() == "Ascending")
+                {
+                    //listboxReports.ItemsSource = reportsRepo.Data.OrderBy(r =>);
+                }
+            }
+            else
+                MessageBox.Show("Please, choose order parameter!");
+        }
+    }
+
         //private void lbi_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         //{
 
         //}
-    }
-}
+ }
+
