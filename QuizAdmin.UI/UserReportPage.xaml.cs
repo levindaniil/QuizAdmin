@@ -39,7 +39,6 @@ namespace QuizAdmin.UI
             UpdateDict += UpdateDictManualy;
             UpdateDictManualy();
             buttonMoreInfo.IsEnabled = false;
-            buttonDelete.IsEnabled = false;
         }
 
         private void UpdateDictManualy()
@@ -113,13 +112,11 @@ namespace QuizAdmin.UI
         {
             if (listboxUserReports.SelectedIndex == -1)
             {
-                buttonMoreInfo.IsEnabled = false;
-                buttonDelete.IsEnabled = false;
+                buttonMoreInfo.IsEnabled = false;                
             }
             else
             {
                 buttonMoreInfo.IsEnabled = true;
-                buttonDelete.IsEnabled = true;
             }
                 
         }
