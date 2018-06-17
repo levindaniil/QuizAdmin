@@ -84,12 +84,12 @@ namespace QuizAdmin.UI
                 var type = comboboxOrderType.SelectionBoxItem.ToString();
                 if (type == "Ascending")
                 {
-                    listboxUserReports.ItemsSource = _userDict.OrderBy(u=> u.Key.Key);
+                    listboxUserReports.ItemsSource = _userDict.OrderBy(u=> u.Value);
                 }
 
                 else if (type == "Descending")
                 {
-                    listboxUserReports.ItemsSource = _userDict.OrderByDescending(u => u.Key.Key);
+                    listboxUserReports.ItemsSource = _userDict.OrderByDescending(u => u.Value);
                 }
             }
             else

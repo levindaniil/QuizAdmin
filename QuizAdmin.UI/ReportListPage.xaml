@@ -51,7 +51,7 @@
             <Button x:Name="buttonGoBack" Content="Go back" Width="200" Margin="5" Click="buttonGoBack_Click" />
             <Button x:Name="buttonHome" Content="Home" Width="200" Margin="5" Click="buttonHome_Click"/>
         </StackPanel>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,15,173" VerticalAlignment="Bottom" >
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,15,133" VerticalAlignment="Bottom" >
             <Button x:Name="buttonOrder" Content="Order by" Width="200" Margin="5" Click="buttonOrder_Click"/>
             <ComboBox x:Name="comboboxOrderType" FontSize="14" HorizontalContentAlignment="Center" Margin="5 0 5 0">
                 <ComboBoxItem Content="Ascending"/>
