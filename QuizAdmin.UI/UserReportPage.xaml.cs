@@ -36,7 +36,7 @@ namespace QuizAdmin.UI
             InitializeComponent();
             reportsUser.ItemAdded += a => RefreshListBox();
             _userDict = CreateUserDictionary();
-            listboxUserReports.ItemsSource = _userDict;
+            listboxUserReports.ItemsSource = _userDict;            
         }
 
         private Dictionary<User,int> CreateUserDictionary()
@@ -72,13 +72,16 @@ namespace QuizAdmin.UI
         {
             if (comboboxOrderType.SelectedItem != null)
             {
-                if (comboboxOrderType.SelectedItem.ToString() == "Ascending")
+                var type = comboboxOrderType.SelectionBoxItem.ToString();
+                if (type == "Ascending")
                 {
-                    listboxUserReports.ItemsSource = reportsUser.Data.OrderBy(r => r.Key);
+                    listboxUserReports.ItemsSource = _userDict.OrderBy(u=> u.Key.Key);
                 }
 
-                else
-                    listboxUserReports.ItemsSource = reportsUser.Data.OrderByDescending(r => r.Key);
+                else if (type == "Descending")
+                {
+                    listboxUserReports.ItemsSource = _userDict.OrderByDescending(u => u.Key.Key);
+                }
             }
             else
                 MessageBox.Show("Please, choose order parameter!");
@@ -88,7 +91,7 @@ namespace QuizAdmin.UI
         {
             if (listboxUserReports.SelectedItem != null)
             {
-                var selectedUser = listboxUserReports.SelectedItem as User;
+                var selectedUser = ((KeyValuePair<User, int>)listboxUserReports.SelectedItem).Key as User;
                 ShowMore?.Invoke(selectedUser);
                 listboxUserReports.SelectedIndex = -1;
             }
