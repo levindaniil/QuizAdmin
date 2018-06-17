@@ -24,6 +24,7 @@ namespace QuizAdmin.UI
     {
         IRepository<Report> reportsRepo = RepositoryFactory.Default.GetRepository<Report>() as ReportRepository;
         public Action GoHome;
+        public Action GoBack;
 
         public ReportListPage()
         {
@@ -60,6 +61,12 @@ namespace QuizAdmin.UI
             }
             else
                 MessageBox.Show("Please, choose order parameter!");
+        }
+
+        private void buttonGoBack_Click(object sender, RoutedEventArgs e)
+        {
+            listboxReports.SelectedIndex = -1;
+            GoBack?.Invoke();
         }
     }
 

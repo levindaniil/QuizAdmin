@@ -27,6 +27,7 @@ namespace QuizAdmin.UI
     {
         IRepository<Report> reportsRepo = RepositoryFactory.Default.GetRepository<Report>() as ReportRepository;
         public Action GoHome;
+        public Action ShowMore;
 
         public UserReportPage()
         {
@@ -61,6 +62,18 @@ namespace QuizAdmin.UI
             }
             else
                 MessageBox.Show("Please, choose order parameter!");
+        }
+
+        private void buttonMoreInfo_Click(object sender, RoutedEventArgs e)
+        {
+            if (listboxUserReports.SelectedItem != null)
+            {
+                var selectedUser = listboxUserReports.SelectedItem as User;
+                ShowMore?.Invoke();
+                listboxUserReports.SelectedIndex = -1;
+            }
+            else
+                MessageBox.Show("Please, select a user");
         }
     }
 }

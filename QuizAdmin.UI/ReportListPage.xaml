@@ -48,7 +48,7 @@
             </ListBox>
         </Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="5 0 15 5" VerticalAlignment="Bottom" >
-            <Button x:Name="buttonGoBack" Content="Go back" Width="200" Margin="5" />
+            <Button x:Name="buttonGoBack" Content="Go back" Width="200" Margin="5" Click="buttonGoBack_Click" />
             <Button x:Name="buttonHome" Content="Home" Width="200" Margin="5" Click="buttonHome_Click"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,15,147.6" VerticalAlignment="Bottom" >
