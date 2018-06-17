@@ -36,7 +36,7 @@
                                 <TextBlock Text="Status:  " FontSize="14"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" MinHeight="20">
-                                <TextBlock x:Name="textBlockDate" Text="{Binding Replied, StringFormat=MM/dd/yyyy}"  FontSize="14"/>
+                                <TextBlock x:Name="textBlockDate" Text="{Binding Question.ShortDate}"  FontSize="14"/>
                                 <TextBlock x:Name="User"  Text="{Binding User.Id}" FontSize="14"/>
                                 <TextBlock x:Name="textBlockQuestion" TextWrapping="Wrap" Text="{Binding Question.Text}" FontSize="14"/>
                                 <TextBlock x:Name="textBlockCorrect" Text="{Binding Correct}" FontSize="14"/>

@@ -35,7 +35,7 @@
         </StackPanel>
 
         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" VerticalAlignment="Bottom" >
-            <DatePicker  CalendarStyle="{StaticResource styleCalendar}" SelectedDate="{x:Static sys:DateTime.Now}" Name="datePicker" Grid.Column="1" Margin="5" ToolTip="Choose date of the question" FontSize="16" HorizontalContentAlignment="Stretch"  Height="30" Language="English"/>
+            <DatePicker  CalendarStyle="{StaticResource styleCalendar}" SelectedDate="{x:Static sys:DateTime.Now}" Name="datePicker" Grid.Column="1" Margin="5" ToolTip="Choose date of the question" FontSize="16" HorizontalContentAlignment="Stretch"  Height="30" Language="English" SelectedDateFormat="Long" IsTodayHighlighted="True"/>
             <Button x:Name="buttonAddQuestion" Content="Add question" Width="215" Margin="5" Click="buttonAddQuestion_Click"/>
             <Button x:Name="buttonHome" Content="Home" Width="215" Margin="5 5 5 0" Click="buttonHome_Click"/>
         </StackPanel>
