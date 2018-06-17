@@ -38,8 +38,8 @@ namespace QuizAdmin.UI
             reportsUser.ItemAdded += a => RefreshListBox();
             UpdateDict += UpdateDictManualy;
             UpdateDictManualy();
-            buttonMoreInfo.Visibility = Visibility.Hidden;
-            buttonDelete.Visibility = Visibility.Hidden;
+            buttonMoreInfo.IsEnabled = false;
+            buttonDelete.IsEnabled = false;
         }
 
         private void UpdateDictManualy()
@@ -94,7 +94,7 @@ namespace QuizAdmin.UI
                 }
             }
             else
-                MessageBox.Show("Please, choose order parameter!");
+                MessageBox.Show("Please, choose order parameter!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void buttonMoreInfo_Click(object sender, RoutedEventArgs e)
@@ -106,27 +106,23 @@ namespace QuizAdmin.UI
                 listboxUserReports.SelectedIndex = -1;
             }
             else
-                MessageBox.Show("Please, select a user");
+                MessageBox.Show("Please, select a user", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void listboxUserReports_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            buttonMoreInfo.Visibility = Visibility.Visible;
-            buttonDelete.Visibility = Visibility.Visible;
-        }
-
-        private void buttonDelete_Click(object sender, RoutedEventArgs e)
-        {
-            if (listboxUserReports.SelectedItem != null)
+            if (listboxUserReports.SelectedIndex == -1)
             {
-                var selectedUserToDelete = ((KeyValuePair<User, int>)listboxUserReports.SelectedItem).Key as User;
-
-             /*
-                ФантомныйМетод(selectedUserToDelete) 
-             */
+                buttonMoreInfo.IsEnabled = false;
+                buttonDelete.IsEnabled = false;
             }
             else
-                MessageBox.Show("Please, select a user");
+            {
+                buttonMoreInfo.IsEnabled = true;
+                buttonDelete.IsEnabled = true;
+            }
+                
         }
+        
     }
 }

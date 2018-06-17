@@ -38,7 +38,12 @@ namespace QuizAdmin.Logic.Repository
 
         public override void RemoveItem(User item)
         {
-            base.RemoveItem(item);
+            using (var context = new Context())
+            {
+                var user = context.Users.FirstOrDefault(a => a.Id == item.Id);
+                context.SaveChanges();
+            }
+            _items.Remove(_items.FirstOrDefault(r => r.Id == item.Id));
         }
     }
 }

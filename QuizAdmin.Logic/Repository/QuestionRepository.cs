@@ -79,13 +79,15 @@ namespace QuizAdmin.Logic.Repository
         {            
             using (var context = new Context())
             {
-                var reportsToRemove = context.Reports.Include("Answers").Where(r => r.Question.Id == question.Id).ToList();
+                var reportsToRemove = context.Reports.Where(r => r.Question.Id == question.Id).ToList();
+
                 foreach (var r in reportsToRemove)
                 {
                     context.Answers.RemoveRange(r.Answers);
                 }
 
                 context.Set<Report>().RemoveRange(reportsToRemove);
+                context.SaveChanges();
 
                 var questionToRemove = context.Questions.Include("Answers").FirstOrDefault(q => q.Id == question.Id);
                 context.Answers.RemoveRange(questionToRemove.Answers);

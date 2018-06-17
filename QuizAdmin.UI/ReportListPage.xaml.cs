@@ -64,7 +64,7 @@ namespace QuizAdmin.UI
                 }
             }
             else
-                MessageBox.Show("Please, choose order parameter!");
+                MessageBox.Show("Please, choose order parameter!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void buttonGoBack_Click(object sender, RoutedEventArgs e)

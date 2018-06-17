@@ -45,11 +45,10 @@
             </ListBox>
         </Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="5 0 15 5" VerticalAlignment="Bottom" >
-            <Button x:Name="buttonDelete" Content="Delete User" Width="200" Margin="5" Click="buttonDelete_Click" />
-            <Button x:Name="buttonMoreInfo" Content="More info" Width="200" Margin="5" Click="buttonMoreInfo_Click" />
+             <Button x:Name="buttonMoreInfo" Content="More info" Width="200" Margin="5" Click="buttonMoreInfo_Click" />
             <Button x:Name="buttonHome" Content="Home" Width="200" Margin="5" Click="buttonHome_Click" />
         </StackPanel>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,15,173.6" VerticalAlignment="Bottom" >
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,15,173" VerticalAlignment="Bottom" >
             <Button x:Name="buttonOrder" Content="Order by" Width="200" Margin="5" Click="buttonOrder_Click" />
             <ComboBox x:Name="comboboxOrderType" FontSize="14" HorizontalContentAlignment="Center" Margin="5 0 5 0">
                 <ComboBoxItem Content="Ascending"/>
