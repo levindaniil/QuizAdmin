@@ -37,7 +37,9 @@ namespace QuizAdmin.UI
             InitializeComponent();
             reportsUser.ItemAdded += a => RefreshListBox();
             UpdateDict += UpdateDictManualy;
-            UpdateDictManualy();                      
+            UpdateDictManualy();
+            buttonMoreInfo.Visibility = Visibility.Hidden;
+            buttonDelete.Visibility = Visibility.Hidden;
         }
 
         private void UpdateDictManualy()
@@ -102,6 +104,26 @@ namespace QuizAdmin.UI
                 var selectedUser = ((KeyValuePair<User, int>)listboxUserReports.SelectedItem).Key as User;
                 ShowMore?.Invoke(selectedUser);
                 listboxUserReports.SelectedIndex = -1;
+            }
+            else
+                MessageBox.Show("Please, select a user");
+        }
+
+        private void listboxUserReports_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            buttonMoreInfo.Visibility = Visibility.Visible;
+            buttonDelete.Visibility = Visibility.Visible;
+        }
+
+        private void buttonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (listboxUserReports.SelectedItem != null)
+            {
+                var selectedUserToDelete = ((KeyValuePair<User, int>)listboxUserReports.SelectedItem).Key as User;
+
+             /*
+                ФантомныйМетод(selectedUserToDelete) 
+             */
             }
             else
                 MessageBox.Show("Please, select a user");
