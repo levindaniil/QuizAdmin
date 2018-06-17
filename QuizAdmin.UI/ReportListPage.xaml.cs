@@ -25,11 +25,12 @@ namespace QuizAdmin.UI
         IRepository<Report> reportsRepo = RepositoryFactory.Default.GetRepository<Report>() as ReportRepository;
         public Action GoHome;
         public Action GoBack;
+        User _user;
 
         public ReportListPage(User user)
         {
             InitializeComponent();
-            
+            _user = user;
             listboxReports.ItemsSource = reportsRepo.Data.Where(r => r.User.Id == user.Id);
             reportsRepo.ItemAdded += a => RefreshListBox();
         }
@@ -52,12 +53,15 @@ namespace QuizAdmin.UI
         {
             if (comboboxOrderType.SelectedItem != null)
             {
-                if (comboboxOrderType.SelectedItem.ToString() == "Ascending")
+                var type = comboboxOrderType.SelectionBoxItem.ToString();
+                if (type == "Ascending")
                 {
-                    listboxReports.ItemsSource = reportsRepo.Data.OrderBy(r =>r.Replied);
+                    listboxReports.ItemsSource = reportsRepo.Data.Where(u => u.User.Key == _user.Key).OrderBy(r => r.Question.Date);
                 }
-                else
-                    listboxReports.ItemsSource = reportsRepo.Data.OrderByDescending(r => r.Replied);
+                else if (type == "Descending")
+                {
+                    listboxReports.ItemsSource = reportsRepo.Data.Where(u => u.User.Key == _user.Key).OrderByDescending(r => r.Question.Date);
+                }
             }
             else
                 MessageBox.Show("Please, choose order parameter!");
@@ -70,9 +74,9 @@ namespace QuizAdmin.UI
         }
     }
 
-        //private void lbi_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
+    //private void lbi_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    //{
 
-        //}
- }
+    //}
+}
 

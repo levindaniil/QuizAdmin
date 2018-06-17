@@ -31,15 +31,15 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" MinHeight="20">
                                 <TextBlock Text="Date:    "  FontSize="14"/>
-                                <TextBlock Text="User:    " FontSize="14"/>
-                                <TextBlock Text="Question:" FontWeight="Bold" FontSize="14"/>
-                                <TextBlock Text="Status:  " FontSize="14"/>
+                                <TextBlock Text="Status:  " FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="Replied: " FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="Question:" FontSize="14"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" MinHeight="20">
                                 <TextBlock x:Name="textBlockDate" Text="{Binding Question.ShortDate}"  FontSize="14"/>
-                                <TextBlock x:Name="User"  Text="{Binding User.Id}" FontSize="14"/>
-                                <TextBlock x:Name="textBlockQuestion" TextWrapping="Wrap" Text="{Binding Question.Text}" FontSize="14"/>
                                 <TextBlock x:Name="textBlockCorrect" Text="{Binding Correct}" FontSize="14"/>
+                                <TextBlock x:Name="textBlockReplDate" Text="{Binding Replied, StringFormat=dd.MM.yyyy}" FontSize="14"/>
+                                <TextBlock x:Name="textBlockQuestion" TextWrapping="Wrap" Text="{Binding Question.Text}" FontSize="14"/>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
