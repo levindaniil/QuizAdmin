@@ -16,17 +16,18 @@
         </Grid.ColumnDefinitions>
         <Image Source="logo.png" Grid.Column="1" VerticalAlignment="Top" Margin="10" HorizontalAlignment="Right"/>
         <Grid  Margin="10">
-            <ListBox x:Name="listboxUserReports" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalContentAlignment="Center">
+            <ListBox x:Name="listboxUserReports" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalContentAlignment="Center"
+                     ItemsSource="{Binding}">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
                     </Style>
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
-                    <DataTemplate DataType="x:type logic=Model.Report">
-                        <Grid x:Name="listBoxItemTemplate" HorizontalAlignment="Stretch" >
+                    <DataTemplate>
+                        <Grid x:Name="listBoxItemTemplate" HorizontalAlignment="Stretch">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="100"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" MinHeight="20">
@@ -34,8 +35,8 @@
                                 <TextBlock Text="Total score:" FontWeight="Bold" FontSize="14"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" MinHeight="20">
-                                <TextBlock x:Name="User"  Text="{Binding Key}" FontSize="14"/>
-                                <TextBlock x:Name="textBlockTotScor" Text=""  FontSize="14"/>
+                                <TextBlock x:Name="User"  Text="{Binding Path=Key.Key}" FontSize="14"/>
+                                <TextBlock x:Name="textBlockTotScor" Text="{Binding Path=Value}"  FontSize="14"/>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>

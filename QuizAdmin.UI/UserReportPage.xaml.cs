@@ -26,14 +26,34 @@ namespace QuizAdmin.UI
     public partial class UserReportPage : Page
     {
         IRepository<User> reportsUser = RepositoryFactory.Default.GetRepository<User>() as UserRepository;
+        IRepository<Report> reportsRepo = RepositoryFactory.Default.GetRepository<Report>() as ReportRepository;
         public Action GoHome;
         public Action<User> ShowMore;
+        Dictionary<User, int> _userDict;
 
         public UserReportPage()
         {
             InitializeComponent();
-            listboxUserReports.ItemsSource = reportsUser.Data;//.OrderByDescending(a => a.Replied);
             reportsUser.ItemAdded += a => RefreshListBox();
+            _userDict = CreateUserDictionary();
+            listboxUserReports.ItemsSource = _userDict;
+        }
+
+        private Dictionary<User,int> CreateUserDictionary()
+        {
+            var userDict = new Dictionary<User, int>();
+            foreach(var user in reportsUser.Data)
+            {
+                int score = 0;
+                var userReport = reportsRepo.Data.Where(r => r.User.Id == user.Id);
+                foreach(var report in userReport)
+                {
+                    if (report.IsOK == true) score++;
+                    else if (report.IsOK == false) score--;
+                }
+                userDict[user] = score;
+            }
+            return userDict;
         }
 
         private void RefreshListBox()
