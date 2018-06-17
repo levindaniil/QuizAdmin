@@ -26,7 +26,8 @@ namespace QuizAdmin.UI
         
         IRepository<Question> questionsRepo = RepositoryFactory.Default.GetRepository<Question>();
         IRepository<Answer> answerRepo = RepositoryFactory.Default.GetRepository<Answer>();
-       
+        IRepository<Report> reportRepo = RepositoryFactory.Default.GetRepository<Report>();
+
 
         public Action GoHome;
         public Action<Question> EditWindow;
@@ -57,16 +58,21 @@ namespace QuizAdmin.UI
             var question = listboxQuestions.SelectedItem as Question;
             if (question != null)
             {
-                var res = MessageBox.Show("Do you want to delete the question", "Deleting question", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var res = MessageBox.Show("Do you want to delete the question and reports for it?", "Deleting question", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (res == MessageBoxResult.Yes)
                 {
-                    var answers = questionsRepo.Data.FirstOrDefault(q => q.Id == question.Id).Answers.ToList();                    
+                    var reports = reportRepo.Data.Where(r => r.Question.Id == question.Id).ToList();
+                    foreach (var item in reports)
+                        reportRepo.RemoveItem(item);
 
+                    var answers = questionsRepo.Data.FirstOrDefault(q => q.Id == question.Id).Answers.ToList();                  
                     foreach (var item in answers)
                         answerRepo.RemoveItem(item);
 
                     questionsRepo.RemoveItem(question);
                     RefreshListBox();
+
+                    PageFactory.Instance.PageRepository.UserReportPage.UpdateDict?.Invoke();
                 }               
             }            
             

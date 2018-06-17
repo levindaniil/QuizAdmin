@@ -31,7 +31,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" MinHeight="20">
-                                <TextBlock Text="User:       " FontSize="14"/>
+                                <TextBlock Text="User:       " FontWeight="Bold" FontSize="14"/>
                                 <TextBlock Text="Total score:" FontWeight="Bold" FontSize="14"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" MinHeight="20">

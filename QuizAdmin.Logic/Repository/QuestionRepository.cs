@@ -16,6 +16,7 @@ namespace QuizAdmin.Logic.Repository
                 _items = context.Questions.Include("Answers").ToList();
             }
         }
+               
 
         public override Question AddItem(Question question)
         {
@@ -75,9 +76,17 @@ namespace QuizAdmin.Logic.Repository
         }
 
         public override void RemoveItem(Question question)
-        {
+        {            
             using (var context = new Context())
             {
+                var reportsToRemove = context.Reports.Include("Answers").Where(r => r.Question.Id == question.Id).ToList();
+                foreach (var r in reportsToRemove)
+                {
+                    context.Answers.RemoveRange(r.Answers);
+                }
+
+                context.Set<Report>().RemoveRange(reportsToRemove);
+
                 var questionToRemove = context.Questions.Include("Answers").FirstOrDefault(q => q.Id == question.Id);
                 context.Answers.RemoveRange(questionToRemove.Answers);
                 context.Set<Question>().Remove(questionToRemove);

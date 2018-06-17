@@ -29,14 +29,22 @@ namespace QuizAdmin.UI
         IRepository<Report> reportsRepo = RepositoryFactory.Default.GetRepository<Report>() as ReportRepository;
         public Action GoHome;
         public Action<User> ShowMore;
+        public Action UpdateDict;
         Dictionary<User, int> _userDict;
 
         public UserReportPage()
         {
             InitializeComponent();
             reportsUser.ItemAdded += a => RefreshListBox();
+            UpdateDict += UpdateDictManualy;
+            UpdateDictManualy();                      
+        }
+
+        private void UpdateDictManualy()
+        {
             _userDict = CreateUserDictionary();
-            listboxUserReports.ItemsSource = _userDict;            
+            listboxUserReports.ItemsSource = null;
+            listboxUserReports.ItemsSource = _userDict;
         }
 
         private Dictionary<User,int> CreateUserDictionary()

@@ -61,5 +61,15 @@ namespace QuizAdmin.Logic.Repository
             _items.Add(report);
             return report;
         }
+
+        public override void RemoveItem(Report item)
+        {
+            using (var context = new Context())
+            {
+                var report = context.Reports.Include("Answers").FirstOrDefault(a => a.Id == item.Id);
+                context.SaveChanges();
+            }
+            _items.Remove(_items.FirstOrDefault(r => r.Id == item.Id));
+        }
     }
 }

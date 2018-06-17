@@ -19,6 +19,7 @@ namespace QuizAdmin.Logic.Model
         public virtual Question Question { get; set; }
         public virtual List<Answer> Answers { get; set; }
         public DateTime? Replied { get; set; }
+
         [NotMapped]
         public string Correct
         {
@@ -32,5 +33,9 @@ namespace QuizAdmin.Logic.Model
                     return "Unknown";
             }
         }
+
+        [NotMapped]
+        public string ShortReplied => Replied?.ToShortTimeString() ?? "-";
+
     }
 }
