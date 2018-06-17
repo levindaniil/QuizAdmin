@@ -34,7 +34,7 @@
                                 <TextBlock Text="Total score:" FontWeight="Bold" FontSize="14"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" MinHeight="20">
-                                <TextBlock x:Name="User"  Text="{Binding User.Key}" FontSize="14"/>
+                                <TextBlock x:Name="User"  Text="{Binding Key}" FontSize="14"/>
                                 <TextBlock x:Name="textBlockTotScor" Text=""  FontSize="14"/>
                             </StackPanel>
                         </Grid>

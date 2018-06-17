@@ -26,11 +26,11 @@ namespace QuizAdmin.UI
         public Action GoHome;
         public Action GoBack;
 
-        public ReportListPage()
+        public ReportListPage(User user)
         {
             InitializeComponent();
             
-            listboxReports.ItemsSource = reportsRepo.Data.OrderByDescending(a => a.Replied);
+            listboxReports.ItemsSource = reportsRepo.Data.Where(r => r.User.Id == user.Id);
             reportsRepo.ItemAdded += a => RefreshListBox();
         }
 

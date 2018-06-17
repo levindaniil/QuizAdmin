@@ -34,10 +34,8 @@ namespace QuizAdmin.UI
             PageFactory.Instance.PageRepository.QuestionListPage.GoHome += GoHome;
             PageFactory.Instance.PageRepository.QuestionListPage.EditWindow += EditWindow;
             PageFactory.Instance.PageRepository.QuestionListPage.OpenStatistics += OpenStatistics;
-            PageFactory.Instance.PageRepository.ReportListPage.GoHome += GoHome;
-            PageFactory.Instance.PageRepository.ReportListPage.GoBack += GoBack;
             PageFactory.Instance.PageRepository.UserReportPage.GoHome += GoHome;
-            PageFactory.Instance.PageRepository.UserReportPage.ShowMore += ShowMore;
+            PageFactory.Instance.PageRepository.UserReportPage.ShowMore += ShowUserReport;
             mainFrame.NavigationService.Navigate(PageFactory.Instance.PageRepository.HomePage);
         }
 
@@ -51,6 +49,14 @@ namespace QuizAdmin.UI
             var AddQuestionPage = new AddQuestionPage(new Question());
             AddQuestionPage.GoHome += GoHome;
             mainFrame.NavigationService.Navigate(AddQuestionPage);
+        }
+
+        private void ShowUserReport(User user)
+        {
+            var usersReport = new ReportListPage(user);
+            usersReport.GoHome += GoHome;
+            usersReport.GoBack += GoBack;
+            mainFrame.NavigationService.Navigate(usersReport);
         }
 
         private void GoHome()
@@ -76,15 +82,6 @@ namespace QuizAdmin.UI
             mainFrame.NavigationService.Navigate(PageFactory.Instance.PageRepository.UserReportPage);
         }
 
-        private void ShowMore()
-        {
-            mainFrame.NavigationService.Navigate(PageFactory.Instance.PageRepository.ReportListPage);
-        }
-
-        //private void ReportDetails(Report report)
-        //{
-        //    var DetailReporWindow = new DetailReportWindow(report);
-        //}
 
     }
 }

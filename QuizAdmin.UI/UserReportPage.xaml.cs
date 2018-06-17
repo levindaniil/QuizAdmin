@@ -25,21 +25,21 @@ namespace QuizAdmin.UI
 
     public partial class UserReportPage : Page
     {
-        IRepository<Report> reportsRepo = RepositoryFactory.Default.GetRepository<Report>() as ReportRepository;
+        IRepository<User> reportsUser = RepositoryFactory.Default.GetRepository<User>() as UserRepository;
         public Action GoHome;
-        public Action ShowMore;
+        public Action<User> ShowMore;
 
         public UserReportPage()
         {
             InitializeComponent();
-            listboxUserReports.ItemsSource = reportsRepo.Data.OrderByDescending(a => a.Replied);
-            reportsRepo.ItemAdded += a => RefreshListBox();
+            listboxUserReports.ItemsSource = reportsUser.Data;//.OrderByDescending(a => a.Replied);
+            reportsUser.ItemAdded += a => RefreshListBox();
         }
 
         private void RefreshListBox()
         {
             listboxUserReports.ItemsSource = null;
-            listboxUserReports.ItemsSource = reportsRepo.Data;
+            listboxUserReports.ItemsSource = reportsUser.Data;
         }
 
         private void buttonHome_Click(object sender, RoutedEventArgs e)
@@ -54,11 +54,11 @@ namespace QuizAdmin.UI
             {
                 if (comboboxOrderType.SelectedItem.ToString() == "Ascending")
                 {
-                    listboxUserReports.ItemsSource = reportsRepo.Data.OrderBy(r => r.User.Key);
+                    listboxUserReports.ItemsSource = reportsUser.Data.OrderBy(r => r.Key);
                 }
 
                 else
-                    listboxUserReports.ItemsSource = reportsRepo.Data.OrderByDescending(r => r.User.Key);
+                    listboxUserReports.ItemsSource = reportsUser.Data.OrderByDescending(r => r.Key);
             }
             else
                 MessageBox.Show("Please, choose order parameter!");
@@ -69,7 +69,7 @@ namespace QuizAdmin.UI
             if (listboxUserReports.SelectedItem != null)
             {
                 var selectedUser = listboxUserReports.SelectedItem as User;
-                ShowMore?.Invoke();
+                ShowMore?.Invoke(selectedUser);
                 listboxUserReports.SelectedIndex = -1;
             }
             else
