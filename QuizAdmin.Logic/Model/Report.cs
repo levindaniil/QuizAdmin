@@ -37,6 +37,19 @@ namespace QuizAdmin.Logic.Model
                     return "Unknown";
             }
         }
+        [NotMapped]
+        public string Colour
+        {
+            get
+            {
+                if (IsOK == true)
+                    return "LightGreen";
+                else if (IsOK == false)
+                    return "Red";
+                else
+                    return "Black";
+            }
+        }
 
         [NotMapped]
         public string ShortReplied => (Replied == null || Replied == DateTime.MinValue) ?  "-" : Replied?.ToShortTimeString() ;
