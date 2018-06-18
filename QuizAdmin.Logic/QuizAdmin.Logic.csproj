@@ -70,6 +70,10 @@
     <Compile Include="Migrations\201806082022215_DT_type.Designer.cs">
       <DependentUpon>201806082022215_DT_type.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806181315462_ReportDT_type.cs" />
+    <Compile Include="Migrations\201806181315462_ReportDT_type.Designer.cs">
+      <DependentUpon>201806181315462_ReportDT_type.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\Answer.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Repository\AnswerRepository.cs" />
@@ -111,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806082022215_DT_type.resx">
       <DependentUpon>201806082022215_DT_type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806181315462_ReportDT_type.resx">
+      <DependentUpon>201806181315462_ReportDT_type.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

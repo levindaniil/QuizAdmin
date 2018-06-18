@@ -35,6 +35,12 @@ namespace QuizAdmin.REST.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, new HttpError("Cannot find question for the date"));
             }
 
+            Report existingReport = GetReport(currentUser, question.Date);
+            if (existingReport != null)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, new HttpError("Report for these user and date already exists"));
+            }
+
             IRepository<Report> reportList = RepositoryFactory.Default.GetRepository<Report>() as ReportRepository;
             Report report = reportList.AddItem(new Report
             {
@@ -76,13 +82,22 @@ namespace QuizAdmin.REST.Controllers
         {
             IRepository<User> userList = RepositoryFactory.Default.GetRepository<User>() as UserRepository;
             IEnumerable<User> candidateUsers = userList.FindAll(user => user.Key == item);
-            if (candidateUsers.Count() != 1)
+            if (candidateUsers.Count() > 1)
             {
                 return null;
             }
+            else if (candidateUsers.Count() == 0)
+            {
+                var newUser = new User
+                {
+                    Key = item
+                };
+                userList.AddItem(newUser);
+                return newUser;
+            }
             return candidateUsers.First();
         }
-
+        
         private Question GetQuestion(DateTime item)
         {
             IRepository<Question> questionList = RepositoryFactory.Default.GetRepository<Question>() as QuestionRepository;
@@ -92,6 +107,17 @@ namespace QuizAdmin.REST.Controllers
                 return null;
             }
             return candidateQuestions.First();
+        }
+
+        private Report GetReport(User user, DateTime date)
+        {
+            IRepository<Report> reportList = RepositoryFactory.Default.GetRepository<Report>() as ReportRepository;
+            IEnumerable<Report> candidateReports = reportList.FindAll(r => r.User.Id == user.Id && r.Question.Date == date);
+            if (candidateReports.Count() != 1)
+            {
+                return null;
+            }
+            return candidateReports.First();
         }
     }
 }

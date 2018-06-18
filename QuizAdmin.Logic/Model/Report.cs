@@ -13,11 +13,13 @@ namespace QuizAdmin.Logic.Model
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("Id")]
         public Guid Id { get; set; }
+        [Column(TypeName = "datetime2")]
         public DateTime Created { get; set; }
         public bool? IsOK { get; set; }
         public virtual User User { get; set; }
         public virtual Question Question { get; set; }
         public virtual List<Answer> Answers { get; set; }
+        [Column(TypeName = "datetime2")]
         public DateTime? Replied { get; set; }
 
         [NotMapped]
@@ -27,7 +29,9 @@ namespace QuizAdmin.Logic.Model
             {
                 if (IsOK == true)
                     return "Correct";
-                else if (IsOK == false)
+                else if (IsOK == false && Replied == DateTime.MinValue)
+                    return "Skipped";
+                else if (IsOK == false && Replied != DateTime.MinValue)
                     return "Incorrect";
                 else
                     return "Unknown";
@@ -35,7 +39,7 @@ namespace QuizAdmin.Logic.Model
         }
 
         [NotMapped]
-        public string ShortReplied => Replied?.ToShortTimeString() ?? "-";
+        public string ShortReplied => (Replied == null || Replied == DateTime.MinValue) ?  "-" : Replied?.ToShortTimeString() ;
 
     }
 }
