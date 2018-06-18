@@ -43,12 +43,12 @@ namespace QuizAdmin.UI
             {
                 bool dateCheck = true;
                 foreach (var item in questionsRepo.Data)
-                    if ((DateTime)datePicker.SelectedDate == item.Date || (DateTime)datePicker.SelectedDate <= DateTime.Now.Date)
+                    if ((DateTime)datePicker.SelectedDate == item.Date)
                     {
                         dateCheck = false;
                         break;
                     }
-                if (dateCheck)
+                if (dateCheck && (DateTime)datePicker.SelectedDate >= DateTime.Now.Date)
                 {
                     List<Answer> newAnswers = new List<Answer>();
                     if (!String.IsNullOrEmpty(textBoxQuestionText.Text))
@@ -125,7 +125,7 @@ namespace QuizAdmin.UI
             else
             {
                 bool dateCheck = true;
-                if (question.Date != (DateTime)datePicker.SelectedDate || question.Date <= DateTime.Now.Date)
+                if (question.Date != (DateTime)datePicker.SelectedDate)
                 {
                     foreach (var item in questionsRepo.Data)
                         if ((DateTime)datePicker.SelectedDate == item.Date)
@@ -134,7 +134,7 @@ namespace QuizAdmin.UI
                             break;
                         }
                 }
-                if (dateCheck)
+                if (dateCheck && (DateTime)datePicker.SelectedDate >= DateTime.Now.Date)
                 {
                     List<Answer> answers = new List<Answer>();
                     question.Date = (DateTime)datePicker.SelectedDate;
@@ -144,28 +144,6 @@ namespace QuizAdmin.UI
                     if (!String.IsNullOrEmpty(question.Text))
                     {
                         var checkBoxes = GetCheckBoxes();
-
-
-                        //if (checkBoxes.Count > 0)
-                        //{
-                        //    for (int i = 0; i < checkBoxes.Count; i++)
-                        //    {
-                        //        var tb = checkBoxes[i].Content as TextBox;
-                        //        if (!String.IsNullOrEmpty(tb.Text))
-                        //        {
-                        //            Answer newAnswer = new Answer
-                        //            {
-                        //                Text = tb.Text,
-                        //                IsCorrect = (bool)checkBoxes[i].IsChecked
-                        //            };
-
-                        //            question.Answers[i].Text = newAnswer.Text;
-                        //            question.Answers[i].IsCorrect = newAnswer.IsCorrect;
-                        //        }
-                        //    }
-
-                        //    questionsRepo.EditItem(question, question.Id);
-                        //}
                         bool res = true;
                         int checkNull = 0;
                         int textCount = 0;

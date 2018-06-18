@@ -43,7 +43,7 @@ namespace QuizAdmin.Logic.Model
             get
             {
                 if (IsOK == true)
-                    return "LightGreen";
+                    return "Green";
                 else if (IsOK == false)
                     return "Red";
                 else
