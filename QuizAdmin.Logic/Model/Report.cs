@@ -31,7 +31,7 @@ namespace QuizAdmin.Logic.Model
                     return "Correct";
                 else if (IsOK == false && Replied == DateTime.MinValue)
                     return "Skipped";
-                else if (IsOK == false && Replied != DateTime.MinValue)
+                else if (IsOK == false && (Replied != DateTime.MinValue && Replied != null))
                     return "Incorrect";
                 else
                     return "Unknown";
