@@ -43,7 +43,7 @@ namespace QuizAdmin.UI
             {
                 bool dateCheck = true;
                 foreach (var item in questionsRepo.Data)
-                    if ((DateTime)datePicker.SelectedDate == item.Date)
+                    if ((DateTime)datePicker.SelectedDate == item.Date || (DateTime)datePicker.SelectedDate <= DateTime.Now.Date)
                     {
                         dateCheck = false;
                         break;
@@ -125,7 +125,7 @@ namespace QuizAdmin.UI
             else
             {
                 bool dateCheck = true;
-                if (question.Date != (DateTime)datePicker.SelectedDate)
+                if (question.Date != (DateTime)datePicker.SelectedDate || question.Date <= DateTime.Now.Date)
                 {
                     foreach (var item in questionsRepo.Data)
                         if ((DateTime)datePicker.SelectedDate == item.Date)
