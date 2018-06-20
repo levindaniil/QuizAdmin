@@ -116,7 +116,7 @@ namespace QuizAdmin.UI
                     }
                     else { MessageBox.Show("You can't create question without text", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
                 }
-                else { MessageBox.Show("You can't create question in this date", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
+                else { MessageBox.Show("You can't create question for this date", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
             }
             
 
@@ -222,7 +222,7 @@ namespace QuizAdmin.UI
                         MessageBox.Show("You can't create question without text", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 }
-                else MessageBox.Show("You can't create question on this date", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                else MessageBox.Show("You can't create question for this date", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

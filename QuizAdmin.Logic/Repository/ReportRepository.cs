@@ -13,6 +13,13 @@ namespace QuizAdmin.Logic.Repository
         {
             using (var context = new Context())
             {
+                try
+                {
+                    var reportsToRemove = context.Set<Report>().ToList().FindAll(r => r.Question == null || r.User == null);
+                    context.Reports.RemoveRange(reportsToRemove);
+                    context.SaveChanges();
+                }
+                catch { }
                 _items = context.Reports.Include("Question").Include("User").Include("Question.Answers").Include("Answers").ToList();
             }
         }
